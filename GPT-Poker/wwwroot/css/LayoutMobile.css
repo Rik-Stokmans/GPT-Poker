@@ -1,0 +1,163 @@
+@media (min-width: 393px) and (max-width: calc((308px + 597px) - 1px)) {
+
+    :root {
+        --sidebar-width: 308px;
+        --content-width: 1084px;
+        --content-left-width: 597px;
+        --content-right-width: 398px;
+        --sidebar-image-size: 56px;
+        --navbar-height: 80px;
+
+        --color-white: #ffffff;
+        --color-border: #37464F;
+    }
+
+    @font-face {
+        font-family: "Organo";
+        src: url(Fonts/Organo.ttf);
+    }
+
+    @font-face {
+        font-family: "Duolingo-Regulair";
+        src: url(Fonts/DuolingoFontRegulair.ttf);
+    }
+
+    @font-face {
+        font-family: "Duolingo-Bold";
+        src: url(Fonts/DuolingoFontBold.ttf);
+    }
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html,body {
+        height: 100%;
+        width: 100%;
+
+        margin: 0;
+        overflow: hidden;
+    }
+
+    #page {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+
+        background-color: #1E1E1E;
+
+
+    }
+
+    /*
+        Sidebar
+    */
+
+    #sidebar {
+        width: 100%;
+        height: 70px;
+
+        padding: 5px;
+
+        position: absolute;
+        bottom: 0;
+
+        border-top: 1px solid #37464F;
+        background-color: #1E1E1E;
+
+        z-index: 1;
+
+    }
+
+    #sidebar-app-title {
+        visibility: hidden;
+        height: 0;
+    }
+
+    #sidebar-buttons {
+        display: flex;
+        justify-content: space-around;
+
+        :last-child {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+    }
+
+    .sidebar-button {
+        border-radius: 20px;
+        padding: 0;
+    }
+
+    .sidebar-button-image {
+        width: var(--sidebar-image-size);
+        height: var(--sidebar-image-size);
+
+        border-radius: 15px;
+        border: #6f6fda 2px solid;
+
+        /* Temp */
+        background-color: rgb(66, 66, 66);
+    }
+
+    .sidebar-button-text {
+        visibility: hidden;
+        width: 0;
+        height: 0;
+    }
+
+
+
+    /*
+        Content
+    */
+
+    #content {
+        width: 100%;
+        height: 100%;
+
+        overflow-y: auto;
+
+        padding: 0 20px 0 20px;
+    }
+
+    #content::-webkit-scrollbar { /* Chrome, Webkit and Opera */
+        display: none;
+    }
+
+    /* Left */
+
+    #content-left {
+        width: 100%;
+        height: 2000px;
+
+        background: linear-gradient(to bottom, #0000cc 0%, #ff0066 100%);
+    }
+
+    #content-left-navbar {
+
+    }
+
+    #content-left-content {
+
+    }
+
+    /* Right */
+
+    #content-right {
+        visibility: hidden;
+    }
+
+    #content-right-navbar {
+    }
+
+    #content-right-content {
+    }
+
+}

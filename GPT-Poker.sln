@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GPT-Poker", "GPT-Poker\GPT-Poker.csproj", "{09DB96B5-9B7C-4872-A087-11E7E5D41108}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicLayer", "LogicLayer\LogicLayer.csproj", "{0661B844-4B2D-4ADF-BCAC-CBCF8A224873}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{37AC58EB-96F9-4FB7-9EA9-EA107A0A66CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{09DB96B5-9B7C-4872-A087-11E7E5D41108}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09DB96B5-9B7C-4872-A087-11E7E5D41108}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09DB96B5-9B7C-4872-A087-11E7E5D41108}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09DB96B5-9B7C-4872-A087-11E7E5D41108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0661B844-4B2D-4ADF-BCAC-CBCF8A224873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0661B844-4B2D-4ADF-BCAC-CBCF8A224873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0661B844-4B2D-4ADF-BCAC-CBCF8A224873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0661B844-4B2D-4ADF-BCAC-CBCF8A224873}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37AC58EB-96F9-4FB7-9EA9-EA107A0A66CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37AC58EB-96F9-4FB7-9EA9-EA107A0A66CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37AC58EB-96F9-4FB7-9EA9-EA107A0A66CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37AC58EB-96F9-4FB7-9EA9-EA107A0A66CC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
