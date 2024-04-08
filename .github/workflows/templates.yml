@@ -19,6 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - uses: actions/checkout@v4
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
       - name: Restore dependencies
         run: dotnet restore
 
@@ -29,6 +34,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
       - name: Restore dependencies
         run: dotnet restore
       - name: Run Unit Tests for Tests class
@@ -41,6 +52,12 @@ jobs:
     
 
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
       - name: Restore dependencies
         run: dotnet restore
       - name: Run Unit Tests for Tests2 class
