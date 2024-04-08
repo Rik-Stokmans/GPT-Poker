@@ -36,7 +36,7 @@ jobs:
 
     steps:
       - name: Build
-        run: dotnet build --no-restore GPT-Poker.sln
+        run: dotnet build --no-restore
 
   unit-tests-tests:
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
       - name: Run Unit Tests for Tests class
         run: |
           dotnet test --no-build --verbosity normal \
-            --filter "FullyQualifiedName~UnitTests.Tests" GPT-Poker/UnitTests/UnitTests.csproj
+            --filter "FullyQualifiedName~UnitTests.Tests"
 
   unit-tests-tests2:
     runs-on: ubuntu-latest
@@ -58,4 +58,4 @@ jobs:
       - name: Run Unit Tests for Tests2 class
         run: |
           dotnet test --no-build --verbosity normal \
-            --filter "FullyQualifiedName~UnitTests.Tests2" GPT-Poker/UnitTests/UnitTests.csproj
+            --filter "FullyQualifiedName~UnitTests.Tests2"
