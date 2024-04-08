@@ -1,13 +1,13 @@
-name: Build and UnitTests 
+name: Build and Test
 
 on:
   pull_request:
     branches: [ "main", "dev" ]
 
 jobs:
-  setup-and-restore:
+  build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
 
@@ -19,36 +19,43 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-  build:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Build
         run: dotnet build --no-restore GPT-Poker.sln
 
-  test-tests-class:
+  unit-tests-tests:
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Test for Tests class
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run Unit Tests for Tests class
         run: |
           dotnet test --no-build --verbosity normal \
             --filter "FullyQualifiedName~UnitTests.Tests" GPT-Poker.sln
 
-  test-tests2-class:
+  unit-tests-tests2:
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Test for Tests2 class
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run Unit Tests for Tests2 class
         run: |
           dotnet test --no-build --verbosity normal \
             --filter "FullyQualifiedName~UnitTests.Tests2" GPT-Poker.sln
