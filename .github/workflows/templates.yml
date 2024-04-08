@@ -35,6 +35,7 @@ jobs:
     needs: setup-and-restore
 
     steps:
+      - uses: actions/setup-dotnet@v4
       - name: Build
         run: dotnet build --no-restore GPT-Poker.sln
 
@@ -44,6 +45,7 @@ jobs:
     needs: setup-and-restore
 
     steps:
+      - uses: actions/setup-dotnet@v4
       - name: Run Unit Tests for Tests class
         run: |
           dotnet test --no-build --verbosity normal \
@@ -53,8 +55,10 @@ jobs:
     runs-on: ubuntu-latest
     
     needs: setup-and-restore
+    
 
     steps:
+      - uses: actions/setup-dotnet@v4
       - name: Run Unit Tests for Tests2 class
         run: |
           dotnet test --no-build --verbosity normal \
