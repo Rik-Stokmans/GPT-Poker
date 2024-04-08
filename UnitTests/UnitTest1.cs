@@ -6,7 +6,7 @@ public class Tests
     [SetUp]
     public void Setup()
     {
-        
+        // This is a comment
     }
     
     [Test]
