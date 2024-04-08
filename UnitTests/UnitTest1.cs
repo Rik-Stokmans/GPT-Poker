@@ -3,8 +3,6 @@ namespace UnitTests;
 public class Tests
 {
     
-    
-    
     [SetUp]
     public void Setup()
     {
@@ -22,10 +20,26 @@ public class Tests
     {
         Assert.Fail();
     }
+}
+
+public class Tests2
+{
+    
+    [SetUp]
+    public void Setup()
+    {
+        
+    }
     
     [Test]
-    public void InconclusiveTest()
+    public void PassTest()
     {
-        Assert.Inconclusive();
+        Assert.Pass();
+    }
+    
+    [Test]
+    public void FailTest()
+    {
+        Assert.Fail();
     }
 }
