@@ -10,22 +10,22 @@ public class Tests
     {
         
     }
-
+    
     [Test]
-    public void Test1()
+    public void PassTest()
     {
         Assert.Pass();
     }
     
     [Test]
-    public void Test2()
-    {
-        Assert.Pass();
-    }
-    
-    [Test]
-    public void Test3()
+    public void FailTest()
     {
         Assert.Fail();
+    }
+    
+    [Test]
+    public void InconclusiveTest()
+    {
+        Assert.Inconclusive();
     }
 }
