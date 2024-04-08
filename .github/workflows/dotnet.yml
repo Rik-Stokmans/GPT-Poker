@@ -29,5 +29,4 @@ jobs:
     - name: Test
       run: |
         dotnet test --no-build --verbosity normal \
-          --filter "FullyQualifiedName~UnitTests.Tests" \
-          --filter "FullyQualifiedName~UnitTests.Tests2"
+          --filter "FullyQualifiedName~UnitTests.Tests|FullyQualifiedName~UnitTests.Tests2"
