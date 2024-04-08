@@ -6,6 +6,12 @@ on:
     branches: [ "main", "dev" ]
 
 jobs:
+  setup-and-restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+  
   test-tests-class:
     needs: setup-and-restore
     runs-on: ubuntu-latest
