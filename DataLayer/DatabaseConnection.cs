@@ -22,7 +22,7 @@ public class DatabaseConnection : IAsyncDisposable
         {
             Connection.Open();
             
-            Console.WriteLine("Connected to database.");
+            Console.WriteLine("Connected to the database.");
         }
         catch (MySqlException exception)
         {
@@ -34,6 +34,6 @@ public class DatabaseConnection : IAsyncDisposable
     {
         await Connection.CloseAsync();
         
-        Console.WriteLine("Disconnected from database.");
+        Console.WriteLine("Disconnected from the database.");
     }
 }
