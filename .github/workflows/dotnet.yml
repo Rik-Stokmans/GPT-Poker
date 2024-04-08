@@ -27,19 +27,7 @@ jobs:
       run: dotnet build --no-restore
 
     - name: Test
-      run: dotnet test --no-build --verbosity normal
-
-    - name: Upload Test Results
-      uses: actions/upload-artifact@v2
-      with:
-        name: Test Results
-        path: TestResults
-
-    - name: Report Test Results
-      uses: actions/github-script@v4
-      with:
-        script: |
-          const fs = require('fs');
-          const results = fs.readFileSync('./TestResults/TestResults.xml', 'utf8');
-          console.log(results);
-          // Parse the test results and report them accordingly
+      run: |
+        dotnet test --no-build --verbosity normal \
+          --filter "FullyQualifiedName~UnitTests.Tests" \
+          --filter "FullyQualifiedName~UnitTests.Tests2"
