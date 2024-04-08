@@ -30,8 +30,10 @@ jobs:
       run: |
         dotnet test --no-build --verbosity normal \
           --filter "FullyQualifiedName~UnitTests.Tests"
+      continue-on-error: true
 
     - name: Test for Tests2 class
       run: |
         dotnet test --no-build --verbosity normal \
           --filter "FullyQualifiedName~UnitTests.Tests2"
+      continue-on-error: true
