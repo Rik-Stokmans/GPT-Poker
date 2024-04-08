@@ -28,7 +28,7 @@ public class Tests2
     [SetUp]
     public void Setup()
     {
-        
+        // This is a comment
     }
     
     [Test]
