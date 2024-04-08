@@ -1,0 +1,17 @@
+# test_tests2.yml
+name: Test for Tests2 Class
+
+on:
+  pull_request:
+    branches: [ "main", "dev" ]
+
+jobs:
+  test-tests2-class:
+    needs: setup-and-restore
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test for Tests2 class
+        run: |
+          dotnet test --no-build --verbosity normal \
+            --filter "FullyQualifiedName~UnitTests.Tests2"
