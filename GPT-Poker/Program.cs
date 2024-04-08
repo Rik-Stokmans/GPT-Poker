@@ -1,10 +1,5 @@
-using DataLayer.Services;
 using GPT_Poker;
-using LogicLayer.Interfaces;
 using LogicLayer.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
