@@ -1,11 +1,11 @@
-name: Setup and Restore
+name: Setup and Dependencies Restore
 
 on:
   pull_request:
     branches: [ "main", "dev" ]
 
 jobs:
-  setup-and-restore:
+  setup-and-dependencies-restore:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
     steps:
       - name: Build
         run: dotnet build --no-restore
-        
+  
   test-tests-class:
     runs-on: ubuntu-latest
     
