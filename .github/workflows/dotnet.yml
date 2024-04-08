@@ -26,7 +26,12 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
-    - name: Test
+    - name: Test for Tests class
       run: |
         dotnet test --no-build --verbosity normal \
-          --filter "FullyQualifiedName~UnitTests.Tests|FullyQualifiedName~UnitTests.Tests2"
+          --filter "FullyQualifiedName~UnitTests.Tests"
+
+    - name: Test for Tests2 class
+      run: |
+        dotnet test --no-build --verbosity normal \
+          --filter "FullyQualifiedName~UnitTests.Tests2"
