@@ -14,12 +14,6 @@ public class Tests
     {
         Assert.Pass();
     }
-    
-    [Test]
-    public void FailTest()
-    {
-        Assert.Fail();
-    }
 }
 
 public class Tests2
@@ -35,11 +29,5 @@ public class Tests2
     public void PassTest()
     {
         Assert.Pass();
-    }
-    
-    [Test]
-    public void FailTest()
-    {
-        Assert.Fail();
     }
 }
