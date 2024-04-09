@@ -22,37 +22,6 @@ jobs:
 
       - name: Build
         run: dotnet build --no-restore
-
-  test-tests-class:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Test for Tests class
-        run: dotnet test --verbosity normal GPT-Poker/UnitTests/UnitTests.csproj
-
-  test-tests2-class:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Test for Tests2 class
+        
+      - name: Test
         run: dotnet test --verbosity normal GPT-Poker/UnitTests/UnitTests.csproj
