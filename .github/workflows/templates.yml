@@ -38,8 +38,7 @@ jobs:
         run: dotnet restore
 
       - name: Test for Tests class
-        run: dotnet test --no-build --verbosity normal \
-            --filter "FullyQualifiedName~UnitTests.Tests"
+        run: dotnet test --no-build --verbosity normal GPT-Poker/UnitTests/UnitTests.csproj
 
   test-tests2-class:
     runs-on: ubuntu-latest
@@ -56,5 +55,4 @@ jobs:
         run: dotnet restore
 
       - name: Test for Tests2 class
-        run: dotnet test --no-build --verbosity normal \
-            --filter "FullyQualifiedName~UnitTests.Tests2"
+        run: dotnet test --no-build --verbosity normal GPT-Poker/UnitTests/UnitTests.csproj
