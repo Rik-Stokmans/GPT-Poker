@@ -1,51 +1,24 @@
-name: Setup and Dependencies Restore
+name: Setup, Build, and Test
 
 on:
   pull_request:
     branches: [ "main", "dev" ]
 
 jobs:
-  setup-and-dependencies-restore:
+  
+  build:
+    
     runs-on: ubuntu-latest
-
+    
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-
       - name: Restore dependencies
         run: dotnet restore
-
-
-
-  build:
-    runs-on: ubuntu-latest
-    
-    steps:
       - name: Build
         run: dotnet build --no-restore
-  
-  
-  
-  test-tests-class:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Test for Tests class
-        run: |
-          dotnet test --no-build --verbosity normal \
-            --filter "FullyQualifiedName~UnitTests.Tests"
-        
-
-
-  test-tests2-class:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Test for Tests2 class
-        run: |
-          dotnet test --no-build --verbosity normal \
-            --filter "FullyQualifiedName~UnitTests.Tests2"
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
