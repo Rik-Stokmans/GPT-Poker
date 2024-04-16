@@ -8,10 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="wwwroot\js\" />
       <Folder Include="wwwroot\lib\" />
     </ItemGroup>
@@ -21,6 +17,11 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.js" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\dist\jquery.min.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\jquery\LICENSE.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
+      <ProjectReference Include="..\LogicLayer\LogicLayer.csproj" />
     </ItemGroup>
 
 </Project>
