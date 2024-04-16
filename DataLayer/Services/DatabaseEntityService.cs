@@ -28,8 +28,6 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
             break;
         }
         
-        Console.WriteLine(query);
-        
         
         if (query == "")
         {
@@ -46,19 +44,26 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
             Console.WriteLine(e.Message);
             return default;
         }
-        
-        
     }
+    
 
     public async Task<List<T>?> GetAll()
     {
         await using var connection = new DatabaseConnection();
         var query = "SELECT * FROM " + _tableName;
         
-        var obj = await connection.Connection.QueryAsync<T>(query);
-        return obj.ToList();
+        try
+        {
+            var obj = await connection.Connection.QueryAsync<T>(query);
+            return obj.ToList();
+        } catch (MySqlException e)
+        {
+            Console.WriteLine(e.Message);
+            return default;
+        }
     }
 
+    
     public async Task<string?> Insert(T obj)
     {
         await using var connection = new DatabaseConnection();
@@ -98,10 +103,12 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
         return null;
     }
     
+    
     public Task Update(T obj)
     {
         throw new NotImplementedException();
     }
+    
 
     public Task Delete(int id)
     {
