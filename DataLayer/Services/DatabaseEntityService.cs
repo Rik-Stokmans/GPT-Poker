@@ -24,6 +24,8 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
             
             var key = keyPropertyValue.ToString();
                 
+            
+            //todo: fix "\"" + email + "\""; in the player model to work just like a normal string
             query = "SELECT * FROM " + _tableName + " WHERE " + keyProperty.Name + " = " + key;
             break;
         }

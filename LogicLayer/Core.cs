@@ -15,14 +15,22 @@ public static class Core
 
     
     
-    public static List<Player> GetAllPlayers()
+    public static List<Player>? GetAllPlayers()
     {
-        return _playerService.GetAll().GetAwaiter().GetResult()!;
+        if (_playerService == null)
+        {
+            throw new Exception("Core not initialized");
+        }
+        return _playerService.GetAll().GetAwaiter().GetResult();
     }
     
-    public static Player GetFromKey(Player player)
+    public static Player? GetFromKey(Player player)
     {
-        return _playerService.GetFromKey(player).GetAwaiter().GetResult()!;
+        if (_playerService == null)
+        {
+            throw new Exception("Core not initialized");
+        }
+        return _playerService.GetFromKey(player).GetAwaiter().GetResult();
     }
     
     

@@ -17,7 +17,7 @@ public class Player
     public Player(int id, string? email = null)
     {
         Id = id;
-        if (email != null) Email = "\"" + email + "\"";
+        if (email != null) Email = email;
     }
 
     public Player()
