@@ -1,39 +1,25 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using GPT_Poker.Models;
-using LogicLayer.Interfaces;
-using LogicLayer.Models;
+using LogicLayer;
 
 namespace GPT_Poker.Controllers;
 
-public class HomeController : Controller
+public class HomeController(ILogger<HomeController> logger) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly IDatabaseEntityService<Player> _playerService;
-    
-    public HomeController(ILogger<HomeController> logger, IDatabaseEntityService<Player> playerService)
-    { 
-        _logger = logger;
-        _playerService = playerService;
-    }
+    private readonly ILogger<HomeController> _logger = logger;
 
     public IActionResult Index()
-    { 
-
+    {
+        var view = View();
         
-        var player = _playerService.GetFromKey(new Player(15)).GetAwaiter().GetResult();
-
-        if (player != null)
-        {
-            Console.WriteLine(player.Id);
-            Console.WriteLine(player.Username);
-            Console.WriteLine(player.Email);
-            Console.WriteLine(player.Password);
-            Console.WriteLine(player.Lives);
-        }
+        
+        var players = Core.GetAllPlayers();
+        
+        view.ViewData["players"] = players;
         
 
-        return View();
+        return view;
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

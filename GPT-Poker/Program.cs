@@ -1,9 +1,10 @@
-using GPT_Poker;
+using DataLayer.Services;
+using LogicLayer;
 using LogicLayer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddType<Player>();
+Core.Init(new DatabaseEntityService<Player>());
 
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
@@ -33,3 +34,4 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+

@@ -1,4 +1,7 @@
-﻿<body>
+﻿@using LogicLayer.Models
+
+
+<body>
 
     <div id="content-left">
         <div id="content-left-navbar">
@@ -6,6 +9,15 @@
         </div>
 
         <div id="content-left-content">
+
+            <ul>
+                @foreach (var player in ViewData["players"] as IList<Player>)
+                {
+                    <li>
+                        @player.Username
+                    </li>
+                }
+            </ul>
             
         </div>
     </div>
