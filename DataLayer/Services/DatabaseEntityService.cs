@@ -23,12 +23,12 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
             if (keyPropertyValue == null || keyPropertyValue.Equals(0)) continue;
             
             var key = keyPropertyValue.ToString();
-                
             
-            //todo: fix "\"" + email + "\""; in the player model to work just like a normal string
-            query = "SELECT * FROM " + _tableName + " WHERE " + keyProperty.Name + " = " + key;
+            query = "SELECT * FROM " + _tableName + " WHERE " + keyProperty.Name + " = \"" + key + "\"";
             break;
         }
+        
+        Console.WriteLine(query);
         
         
         if (query == "")
