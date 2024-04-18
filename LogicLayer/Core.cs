@@ -6,6 +6,13 @@ namespace LogicLayer;
 public static class Core
 {
 
+    public enum Result
+    {
+        Succes,
+        Fail,
+        Duplicate
+    }
+
     private static IDatabaseEntityService<Player> _playerService = null!;
     private static bool _initialized;
     
@@ -28,6 +35,13 @@ public static class Core
         CheckInit();
         
         return _playerService.GetFromKey(player).GetAwaiter().GetResult();
+    }
+    
+    public static Result AddPlayer(Player player)
+    {
+        CheckInit();
+        
+        return _playerService.Insert(player).GetAwaiter().GetResult();
     }
     
     public static bool ValidCredentials(Player player, string password)
