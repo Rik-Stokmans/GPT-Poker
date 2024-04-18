@@ -52,10 +52,8 @@ public static class Core
     {
         CheckInit();
         
-        return BCrypt.Net.BCrypt.Verify(password, player.Password);
+        return PasswordProtector.Verify(password, player.Password);
     }
-    
-    
     
     
     //Private methods
