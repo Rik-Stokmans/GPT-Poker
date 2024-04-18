@@ -7,15 +7,24 @@ public class BaseController : Controller
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {
-        if (context.RouteData.Values["Action"] as string == "Logout") return;
         if (HttpContext.Session.TryGetValue("user", out _))
         {
-            context.Result = new RedirectToRouteResult(new RouteValueDictionary{{ "controller", "Home" },  
-                { "action", "Index" }  
-  
-            });  
+            if (context.Controller.GetType() == typeof(LoginController))
+            {
+                context.Result = RedirectToAction("Index", "Home");
+            }
+        }
+        else if (context.Controller.GetType() != typeof(LoginController))
+        {
+            context.Result = RedirectToAction("Index", "Login");
         }
         
         base.OnActionExecuting(context);
+    }
+    
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Clear();
+        return RedirectToAction("Index", "Login");
     }
 }

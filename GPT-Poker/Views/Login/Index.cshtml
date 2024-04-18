@@ -2,14 +2,36 @@
     Layout = null;
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GPT-Poker</title>
+    <link rel="stylesheet" href="css/Login/LoginPage.css">
+    <link rel="stylesheet" href="css/Components.css">
+    <link rel="stylesheet" href="css/Fonts.css">
+</head>
 <body>
 
-<label for="Username">Username:</label>
-<input id="Username">
+<div id="login-container">
 
-<label for="Password">Password:</label>
-<input id="Password">
+    <h1 id="login-title" class="title">Log in</h1>
 
-<button id="LoginButton">Login</button>
+    <form id="form" action="@Url.Action("LoginPost", "Login")" method="post">
+
+        <div id="username-container" class="login-form-control">
+            <input type="text" class="login-form-control input-field" name="username" placeholder="Email or Username">
+        </div>
+
+        <div id="password-container" class="login-form-control">
+            <input type="password" class="login-form-control input-field"  name="password" placeholder="Password">
+        </div>
+
+        <input type="submit" value="LOG IN" class="button-lightblue">
+
+        <p>By signing in to GPT-Poker, you agree to our <a href="">Terms</a> and <a href="">Privacy Policy</a></p>
+    </form>
+
+</div>
 
 </body>

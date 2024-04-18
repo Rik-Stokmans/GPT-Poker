@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Duolingo-Regulair";
+    src: url(../fonts/DuolingoFontRegulair.ttf);
+}
+
+@font-face {
+    font-family: "Duolingo-Bold";
+    src: url(../fonts/DuolingoFontBold.ttf);
+}

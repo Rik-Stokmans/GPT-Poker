@@ -21,7 +21,7 @@ public class LoginController : BaseController
 
         if (player == null)
         {
-            TempData["error"] = "Username not found";
+            TempData["error"] = "Account not found";
             
             return RedirectToAction("Index");
         }
@@ -34,17 +34,9 @@ public class LoginController : BaseController
             
             return RedirectToAction("Index");
         }
-        else
-        {
-            HttpContext.Session.SetString("user", player.Username);
-        }
+        
+        HttpContext.Session.SetString("user", player.Username);
 
         return RedirectToAction("Index", "Home");
-    }
-    
-    public IActionResult Logout()
-    {
-        HttpContext.Session.Remove("user");
-        return RedirectToAction("Index");
     }
 }
