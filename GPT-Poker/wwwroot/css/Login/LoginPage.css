@@ -30,7 +30,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    height: 180px;
+    height: 200px;
 }
 
 #signin-redirect-form {
@@ -39,6 +39,12 @@ body {
     justify-content: space-between;
     width: 100%;
     height: 50px;
+}
+
+#login-error {
+    font-family: Duolingo-Bold, sans-serif;
+    color: #FF4B4B;
+    font-size: 15px;
 }
 
 

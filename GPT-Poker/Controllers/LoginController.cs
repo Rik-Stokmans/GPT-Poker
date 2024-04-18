@@ -28,7 +28,7 @@ public class LoginController : BaseController
 
         if (player == null)
         {
-            TempData["error"] = "Account not found";
+            TempData["login-error"] = "Account not found";
             
             return RedirectToAction("Index");
         }
@@ -37,7 +37,7 @@ public class LoginController : BaseController
         
         if (!Core.ValidCredentials(player, password))
         {
-            TempData["error"] = "Wrong password";
+            TempData["login-error"] = "Incorrect Password";
             
             return RedirectToAction("Index");
         }
@@ -56,14 +56,16 @@ public class LoginController : BaseController
         var message = result switch
         {
             Core.Result.Succes => "Account Created!",
-            Core.Result.Duplicate => "Email or Username is already in use.",
-            _ => "Failed to create account."
+            Core.Result.Duplicate => "Email or Username is already in use",
+            _ => "Failed to create account"
         };
         
         TempData["signin-error"] = message;
         
         if (result == Core.Result.Succes)
         {
+            TempData["signin-error"] = "";
+            
             HttpContext.Session.SetString("user", player.Username);
             return RedirectToAction("Index", "Home");
         }
