@@ -35,7 +35,7 @@ public class LoginController : BaseController
         
         
         
-        if (!Core.ValidCredentials(player, password))
+        if (!Core.ValidateCredentials(player, password))
         {
             TempData["login-error"] = "Incorrect Password";
             

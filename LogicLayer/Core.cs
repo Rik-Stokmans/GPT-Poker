@@ -48,7 +48,7 @@ public static class Core
         return _playerService.Insert(player).GetAwaiter().GetResult();
     }
     
-    public static bool ValidCredentials(Player player, string password)
+    public static bool ValidateCredentials(Player player, string password)
     {
         CheckInit();
         
