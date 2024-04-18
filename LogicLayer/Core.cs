@@ -30,6 +30,14 @@ public static class Core
         return _playerService.GetFromKey(player).GetAwaiter().GetResult();
     }
     
+    public static bool ValidCredentials(Player player, string password)
+    {
+        CheckInit();
+        
+        return player.Password == password;
+    }
+    
+    
     
     
     //Private methods
