@@ -1,10 +1,11 @@
+using System.Text.RegularExpressions;
 using LogicLayer;
 using LogicLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GPT_Poker.Controllers;
 
-public class LoginController : BaseController
+public partial class LoginController : BaseController
 {
     
     public IActionResult Index()
@@ -22,9 +23,10 @@ public class LoginController : BaseController
     }
     
     
-    public IActionResult LoginPost(string username, string password)
+    public IActionResult LoginPost(string identifier, string password)
     {
-        var player = Core.GetPlayer(new Player(0, username: username));
+        var player = Core.GetPlayer(identifier.Contains('@') ? new Player(0, email: identifier) : new Player(0, username: identifier));
+
 
         if (player == null)
         {
@@ -32,8 +34,6 @@ public class LoginController : BaseController
             
             return RedirectToAction("Index");
         }
-        
-        
         
         if (!Core.ValidateCredentials(player, password))
         {
@@ -49,6 +49,42 @@ public class LoginController : BaseController
 
     public IActionResult SignInPost(string username, string email, string password)
     {
+        
+        //check if the email is valid
+        if (!Core.IsValidEmail(email)) 
+        {
+            TempData["signin-error"] = "Invalid Email";
+            return RedirectToAction("SignIn", "Login");
+        }
+        
+        //remove all dots from the email before the '@' and make the email lowercase
+        email = string.Concat(email[..email.IndexOf('@')].Replace(".", ""), email.AsSpan(email.IndexOf('@'))).ToLower();
+        
+        
+        //check if the username is valid
+        if (username.Length is < 5 or > 20)
+        {
+            TempData["signin-error"] = "Username must be between 5 and 20 characters";
+            return RedirectToAction("SignIn", "Login");
+        }
+        
+        //check if the username is alphanumeric
+        if (!UsernameRegex().IsMatch(username))
+        {
+            TempData["signin-error"] = "Username can only contain letters and numbers";
+            return RedirectToAction("SignIn", "Login");
+        }
+        
+        //check if the username starts with a letter
+        if (!char.IsLetter(username[0]))
+        {
+            TempData["signin-error"] = "Username must start with a letter";
+            return RedirectToAction("SignIn", "Login");
+        }
+        
+        
+        
+        
         var player = new Player(0, username, email, password, 5);
 
         var result = Core.AddPlayer(player);
@@ -72,4 +108,7 @@ public class LoginController : BaseController
         
         return RedirectToAction("SignIn", "Login");
     }
+
+    [GeneratedRegex("^[a-zA-Z0-9]+$")]
+    private static partial Regex UsernameRegex();
 }

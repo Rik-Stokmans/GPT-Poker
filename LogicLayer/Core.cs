@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using LogicLayer.Interfaces;
 using LogicLayer.Models;
 using BCrypt.Net;
@@ -39,6 +40,13 @@ public static class Core
         return _playerService.GetFromKey(player).GetAwaiter().GetResult();
     }
     
+    public static bool PlayerExists(Player player)
+    {
+        CheckInit();
+        
+        return GetPlayer(player) != null;
+    }
+    
     public static Result AddPlayer(Player player)
     {
         CheckInit();
@@ -60,6 +68,20 @@ public static class Core
     private static void CheckInit()
     {
         if (!_initialized) throw new Exception("Core not initialized");
+    }
+    
+    public static bool IsValidEmail(string email)
+    {
+        try
+        {
+            var m = new MailAddress(email);
+
+            return true;
+        }
+        catch (FormatException)
+        {
+            return false;
+        }
     }
     
     
