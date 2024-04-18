@@ -5,10 +5,9 @@ using LogicLayer;
 
 namespace GPT_Poker.Controllers;
 
-public class HomeController(ILogger<HomeController> logger) : Controller
+public class HomeController : BaseController
 {
-    private readonly ILogger<HomeController> _logger = logger;
-
+    
     public IActionResult Index()
     {
         var view = View();

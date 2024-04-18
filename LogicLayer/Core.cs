@@ -7,25 +7,44 @@ public static class Core
 {
 
     private static IDatabaseEntityService<Player> _playerService = null!;
+    private static bool _initialized;
     
     public static void Init(IDatabaseEntityService<Player> playerService)
     {
         _playerService = playerService;
+        _initialized = true;
     }
-
     
     
-    public static List<Player> GetAllPlayers()
+    public static List<Player>? GetAllPlayers()
     {
-        return _playerService.GetAll().GetAwaiter().GetResult()!;
+        CheckInit();
+        
+        return _playerService.GetAll().GetAwaiter().GetResult();
     }
     
-    public static Player GetFromKey(Player player)
+    public static Player? GetPlayer(Player player)
     {
-        return _playerService.GetFromKey(player).GetAwaiter().GetResult()!;
+        CheckInit();
+        
+        return _playerService.GetFromKey(player).GetAwaiter().GetResult();
+    }
+    
+    public static bool ValidCredentials(Player player, string password)
+    {
+        CheckInit();
+        
+        return player.Password == password;
     }
     
     
+    
+    
+    //Private methods
+    private static void CheckInit()
+    {
+        if (!_initialized) throw new Exception("Core not initialized");
+    }
     
     
 }
