@@ -7,9 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <title>GPT-Poker</title>
-    <link rel="stylesheet" href="css/Login/LoginPage.css">
-    <link rel="stylesheet" href="css/Components.css">
-    <link rel="stylesheet" href="css/Fonts.css">
+    <link rel="stylesheet" href="~/css/Login/LoginPage.css">
+    <link rel="stylesheet" href="~/css/Components.css">
+    <link rel="stylesheet" href="~/css/Fonts.css">
 </head>
 <body>
 
@@ -17,20 +17,34 @@
 
     <h1 id="login-title" class="title">Log in</h1>
 
-    <form id="form" action="@Url.Action("LoginPost", "Login")" method="post">
+    <form id="login-form" action="@Url.Action("LoginPost", "Login")" method="post">
 
         <div id="username-container" class="login-form-control">
-            <input type="text" class="login-form-control input-field" name="username" placeholder="Email or Username">
+            <input type="text" class="login-form-control input-field" name="identifier" placeholder="Email or Username">
         </div>
 
         <div id="password-container" class="login-form-control">
             <input type="password" class="login-form-control input-field"  name="password" placeholder="Password">
         </div>
 
-        <input type="submit" value="LOG IN" class="button-lightblue">
+        <p id="login-error">@ViewData["login-error"]</p>
 
-        <p>By signing in to GPT-Poker, you agree to our <a href="">Terms</a> and <a href="">Privacy Policy</a></p>
+        <input type="submit" value="LOG IN" class="button-lightblue">
+        
     </form>
+
+    <div id="or-line">
+        <div id="or-line-text"><p>OR</p></div>
+        <hr/>
+    </div>
+
+    <form id="signin-redirect-form" action="@Url.Action("SignIn", "Login")" method="post">
+    
+        <input type="submit" value="CREATE A ACCOUNT" class="button-lime">
+
+    </form>
+
+    <p>By signing in to GPT-Poker, you agree to our <a href="">Terms</a> and <a href="">Privacy Policy</a></p>
 
 </div>
 

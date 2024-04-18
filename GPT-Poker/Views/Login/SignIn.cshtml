@@ -1,0 +1,45 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GPT-Poker</title>
+    <link rel="stylesheet" href="~/css/Login/SigninPage.css">
+    <link rel="stylesheet" href="~/css/Components.css">
+    <link rel="stylesheet" href="~/css/Fonts.css">
+</head>
+<body>
+
+<div id="signin-container">
+
+    <h1 id="signin-title" class="title">Sign in</h1>
+
+    <form id="signin-form" action="@Url.Action("SignInPost", "Login")" method="post">
+
+        <div id="username-container" class="signin-form-control">
+            <input type="text" class="signin-form-control input-field" name="username" placeholder="Username">
+        </div>
+
+        <div id="email-container" class="signin-form-control">
+            <input type="email" class="signin-form-control input-field" name="email" placeholder="Email">
+        </div>
+
+        <div id="password-container" class="signin-form-control">
+            <input type="password" class="signin-form-control input-field"  name="password" placeholder="Password">
+        </div>
+
+        <p id="signin-error">@ViewData["signin-error"]</p>
+
+        <input type="submit" value="CREATE ACCOUNT" class="button-lime">
+        
+    </form>
+    
+    
+    <p>By signing in to GPT-Poker, you agree to our <a href="">Terms</a> and <a href="">Privacy Policy</a></p>
+
+</div>
+
+</body>

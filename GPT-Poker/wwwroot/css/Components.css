@@ -13,6 +13,21 @@
     letter-spacing: 1px;
 }
 
+.button-lime {
+    all: unset;
+    width: 100%;
+    height: 45px;
+    text-align: center;
+    border-radius: 10px;
+    color: #131F24;
+    background-color: #93D333;
+    border-bottom: #79B933 solid 5px;
+    cursor: pointer;
+    font-family: Duolingo-Bold, sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
 .input-field {
     width: 100%;
     height: 45px;
@@ -23,8 +38,9 @@
     border-radius: 10px;
 
     padding: 10px;
-
-
+    
+    color: #FFFFFF;
+    
     font-family: Duolingo-Regulair, sans-serif;
     font-size: 16px;
 }

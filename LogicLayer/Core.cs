@@ -1,10 +1,20 @@
+using System.Net.Mail;
 using LogicLayer.Interfaces;
 using LogicLayer.Models;
+using BCrypt.Net;
+using LogicLayer.Cryptography;
 
 namespace LogicLayer;
 
 public static class Core
 {
+
+    public enum Result
+    {
+        Succes,
+        Fail,
+        Duplicate
+    }
 
     private static IDatabaseEntityService<Player> _playerService = null!;
     private static bool _initialized;
@@ -30,20 +40,48 @@ public static class Core
         return _playerService.GetFromKey(player).GetAwaiter().GetResult();
     }
     
-    public static bool ValidCredentials(Player player, string password)
+    public static bool PlayerExists(Player player)
     {
         CheckInit();
         
-        return player.Password == password;
+        return GetPlayer(player) != null;
     }
     
+    public static Result AddPlayer(Player player)
+    {
+        CheckInit();
+        
+        player.Password = PasswordProtector.Protect(player.Password);
+        
+        return _playerService.Insert(player).GetAwaiter().GetResult();
+    }
     
+    public static bool ValidateCredentials(Player player, string password)
+    {
+        CheckInit();
+        
+        return PasswordProtector.Verify(password, player.Password);
+    }
     
     
     //Private methods
     private static void CheckInit()
     {
         if (!_initialized) throw new Exception("Core not initialized");
+    }
+    
+    public static bool IsValidEmail(string email)
+    {
+        try
+        {
+            var m = new MailAddress(email);
+
+            return true;
+        }
+        catch (FormatException)
+        {
+            return false;
+        }
     }
     
     

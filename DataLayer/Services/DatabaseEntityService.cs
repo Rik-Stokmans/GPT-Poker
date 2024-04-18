@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using LogicLayer.Interfaces;
 using Dapper;
+using LogicLayer;
 using MySql.Data.MySqlClient;
 
 namespace DataLayer.Services;
@@ -64,43 +65,33 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
     }
 
     
-    public async Task<string?> Insert(T obj)
+    public async Task<Core.Result> Insert(T obj)
     {
         await using var connection = new DatabaseConnection();
         var properties = typeof(T).GetProperties().Where(prop => prop.CustomAttributes.All(attr => attr.AttributeType != typeof(DatabaseGeneratedAttribute))).ToList();
         
         var columns = string.Join(", ", properties.Select(prop => prop.Name));
         var values = string.Join(", ", properties.Select(prop => "@" + prop.Name));
-        var query = $"INSERT INTO {_tableName} ({columns}) VALUES ({values}); SELECT last_insert_rowid();";
+        var query = $"INSERT INTO {_tableName} ({columns}) VALUES ({values});";
         
         try
         {
-            var result = await connection.Connection.ExecuteScalarAsync<T>(query, obj);
-
-            if (result != null)
-            {
-                Console.WriteLine("Inserted: ");
-                var prop = result.GetType().GetProperties().ToList();
-                
-                foreach (var propertyInfo in prop)
-                {
-                    var result1 = propertyInfo.GetValue(result);
-                    Console.WriteLine(result1);
-                }
-            }
+            Console.WriteLine(query);
+            
+            await connection.Connection.ExecuteScalarAsync<T>(query, obj);
+            
+            return Core.Result.Succes;
         }
         catch (MySqlException e)
         {
             if (e.Message.StartsWith("Duplicate entry"))
             {
-                
-                var failedColumn = e.Message.Split("'");
-
-                return failedColumn[1];
+                return Core.Result.Duplicate;
             }
+            Console.WriteLine(e.Message);
         }
 
-        return null;
+        return Core.Result.Fail;
     }
     
     
