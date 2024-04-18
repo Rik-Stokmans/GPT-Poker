@@ -1,5 +1,7 @@
 using LogicLayer.Interfaces;
 using LogicLayer.Models;
+using BCrypt.Net;
+using LogicLayer.Cryptography;
 
 namespace LogicLayer;
 
@@ -41,6 +43,8 @@ public static class Core
     {
         CheckInit();
         
+        player.Password = PasswordProtector.Protect(player.Password);
+        
         return _playerService.Insert(player).GetAwaiter().GetResult();
     }
     
@@ -48,7 +52,7 @@ public static class Core
     {
         CheckInit();
         
-        return player.Password == password;
+        return BCrypt.Net.BCrypt.Verify(password, player.Password);
     }
     
     
