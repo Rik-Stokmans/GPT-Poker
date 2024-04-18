@@ -68,7 +68,7 @@ public class CoreTests
     [Test]
     public void GetFromKeyTest()
     {
-        var player = Core.GetFromKey(new Player(0, "Test3@mail.com"));
+        var player = Core.GetPlayer(new Player(0, "Test3@mail.com"));
         
         
         if (player == null)
