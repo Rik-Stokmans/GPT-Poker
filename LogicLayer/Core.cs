@@ -24,7 +24,7 @@ public static class Core
         return _playerService.GetAll().GetAwaiter().GetResult();
     }
     
-    public static Player? GetFromKey(Player player)
+    public static Player? GetPlayer(Player player)
     {
         if (_playerService == null)
         {
