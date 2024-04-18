@@ -14,10 +14,11 @@ public class Player
         Lives = lives;
     }
 
-    public Player(int id, string? email = null)
+    public Player(int id, string? email = null, string? username = null)
     {
         Id = id;
         if (email != null) Email = email;
+        if (username != null) Username = username;
     }
 
     public Player()
@@ -28,6 +29,7 @@ public class Player
     [Key]
     public int Id { get; set; }
     
+    [Key]
     public string Username { get; set; } = null!;
 
     [Key]
