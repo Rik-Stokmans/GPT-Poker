@@ -80,7 +80,7 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
             
             await connection.Connection.ExecuteScalarAsync<T>(query, obj);
             
-            return Core.Result.Succes;
+            return Core.Result.Success;
         }
         catch (MySqlException e)
         {

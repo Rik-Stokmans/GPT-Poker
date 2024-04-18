@@ -1,11 +1,10 @@
-using System.Text.RegularExpressions;
 using LogicLayer;
 using LogicLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GPT_Poker.Controllers;
 
-public partial class LoginController : BaseController
+public class LoginController : BaseController
 {
     
     public IActionResult Index()
@@ -50,6 +49,11 @@ public partial class LoginController : BaseController
     public IActionResult SignInPost(string username, string email, string password)
     {
         
+        
+        
+        //check format the email to remove dots before the '@'
+        email = Core.FormatEmail(email);
+        
         //check if the email is valid
         if (!Core.IsValidEmail(email)) 
         {
@@ -57,58 +61,35 @@ public partial class LoginController : BaseController
             return RedirectToAction("SignIn", "Login");
         }
         
-        //remove all dots from the email before the '@' and make the email lowercase
-        email = string.Concat(email[..email.IndexOf('@')].Replace(".", ""), email.AsSpan(email.IndexOf('@'))).ToLower();
-        
         
         //check if the username is valid
-        if (username.Length is < 5 or > 20)
+        var usernameValidity = Core.IsValidUsername(username);
+        
+        if (!usernameValidity.valid)
         {
-            TempData["signin-error"] = "Username must be between 5 and 20 characters";
+            TempData["signin-error"] = usernameValidity.message;
             return RedirectToAction("SignIn", "Login");
         }
-        
-        //check if the username is alphanumeric
-        if (!UsernameRegex().IsMatch(username))
-        {
-            TempData["signin-error"] = "Username can only contain letters and numbers";
-            return RedirectToAction("SignIn", "Login");
-        }
-        
-        //check if the username starts with a letter
-        if (!char.IsLetter(username[0]))
-        {
-            TempData["signin-error"] = "Username must start with a letter";
-            return RedirectToAction("SignIn", "Login");
-        }
-        
-        
-        
         
         var player = new Player(0, username, email, password, 5);
 
         var result = Core.AddPlayer(player);
         
-        var message = result switch
+        if (result == Core.Result.Success)
         {
-            Core.Result.Succes => "Account Created!",
-            Core.Result.Duplicate => "Email or Username is already in use",
-            _ => "Failed to create account"
-        };
-        
-        TempData["signin-error"] = message;
-        
-        if (result == Core.Result.Succes)
-        {
-            TempData["signin-error"] = "";
-            
             HttpContext.Session.SetString("user", player.Username);
             return RedirectToAction("Index", "Home");
         }
         
+        //if the result is not successful, return the appropriate error message
+        var resultMessage = result switch
+        {
+            Core.Result.Duplicate => "Email or Username is already in use",
+            _ => "Failed to create account"
+        };
+        
+        TempData["signin-error"] = resultMessage;
+        
         return RedirectToAction("SignIn", "Login");
     }
-
-    [GeneratedRegex("^[a-zA-Z0-9]+$")]
-    private static partial Regex UsernameRegex();
 }
