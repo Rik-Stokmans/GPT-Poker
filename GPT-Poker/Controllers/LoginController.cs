@@ -24,7 +24,7 @@ public class LoginController : BaseController
     
     public IActionResult LoginPost(string identifier, string password)
     {
-        var player = Core.GetPlayer(identifier.Contains('@') ? new Player(0, email: identifier) : new Player(0, username: identifier));
+        var player = Core.GetAccount(identifier.Contains('@') ? new Account(0, email: identifier) : new Account(0, username: identifier));
 
 
         if (player == null)
@@ -48,9 +48,6 @@ public class LoginController : BaseController
 
     public IActionResult SignInPost(string username, string email, string password)
     {
-        
-        
-        
         //check format the email to remove dots before the '@'
         email = Core.FormatEmail(email);
         
@@ -71,14 +68,25 @@ public class LoginController : BaseController
             return RedirectToAction("SignIn", "Login");
         }
         
-        var player = new Player(0, username, email, password, 5);
+        
+        
+        var player = new Account(0, username, email, password, 5);
 
-        var result = Core.AddPlayer(player);
+        var result = Core.AddAccount(player);
         
         if (result == Core.Result.Success)
         {
             HttpContext.Session.SetString("user", player.Username);
             return RedirectToAction("Index", "Home");
+        }
+        
+        if (result == Core.Result.Duplicate)
+        {
+            TempData["signin-error"] = Core.AccountExists(new Account(0, username: username))
+                ? "Username is already in use"
+                : "Email is already in use";
+            
+            return RedirectToAction("SignIn", "Login");
         }
         
         //if the result is not successful, return the appropriate error message

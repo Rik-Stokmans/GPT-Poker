@@ -13,9 +13,9 @@ public class HomeController : BaseController
         var view = View();
         
         
-        var players = Core.GetAllPlayers();
+        var accounts = Core.GetAllAccounts();
         
-        view.ViewData["players"] = players;
+        view.ViewData["accounts"] = accounts;
         
 
         return view;

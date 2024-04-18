@@ -6,9 +6,9 @@ namespace UnitTests;
 
 public class CoreTests
 {
-    private readonly List<Player> _players = 
+    private readonly List<Account> _accounts = 
     [
-        new Player
+        new Account
         {
             Id = 1,
             Username = "Player 1",
@@ -17,7 +17,7 @@ public class CoreTests
             Lives = 3
         },
 
-        new Player
+        new Account
         {
             Id = 2,
             Username = "Player 2",
@@ -26,7 +26,7 @@ public class CoreTests
             Lives = 1
         },
 
-        new Player
+        new Account
         {
             Id = 3,
             Username = "Player 3",
@@ -35,7 +35,7 @@ public class CoreTests
             Lives = 0
         },
 
-        new Player
+        new Account
         {
             Id = 4,
             Username = "Player 4",
@@ -44,7 +44,7 @@ public class CoreTests
             Lives = 2
         },
 
-        new Player
+        new Account
         {
             Id = 5,
             Username = "Player 5",
@@ -58,9 +58,9 @@ public class CoreTests
     [SetUp]
     public void Setup()
     {
-        var playerService = new MockDataService<Player>(_players);
+        var accountService = new MockDataService<Account>(_accounts);
         
-        Core.Init(playerService);
+        Core.Init(accountService);
     }
     
     
@@ -68,18 +68,18 @@ public class CoreTests
     [Test]
     public void GetFromKeyTest()
     {
-        var player = Core.GetPlayer(new Player(0, "Test3@mail.com"));
+        var account = Core.GetAccount(new Account(0, "Test3@mail.com"));
         
         
-        if (player == null)
+        if (account == null)
         {
             Assert.Fail("Player not found");
             return;
         }
         
         
-        if (player.Id != 3) Assert.Fail("Player Id is not 3");
-        if (player.Username != "Player 3") Assert.Fail("Player Username is not Player 3");
+        if (account.Id != 3) Assert.Fail("Player Id is not 3");
+        if (account.Username != "Player 3") Assert.Fail("Player Username is not Player 3");
         
         Assert.Pass();
         

@@ -30,11 +30,7 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
         }
         
         
-        if (query == "")
-        {
-            Console.WriteLine("No key with a value found in object.");
-            return default;
-        }
+        if (query == "") return default;
         
         try
         {
@@ -76,8 +72,6 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
         
         try
         {
-            Console.WriteLine(query);
-            
             await connection.Connection.ExecuteScalarAsync<T>(query, obj);
             
             return Core.Result.Success;

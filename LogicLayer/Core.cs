@@ -17,51 +17,51 @@ public static partial class Core
     }
 
     // ReSharper disable once NullableWarningSuppressionIsUsed
-    private static IDatabaseEntityService<Player> _playerService = null!;
+    private static IDatabaseEntityService<Account> _accountService = null!;
     private static bool _initialized;
     
-    public static void Init(IDatabaseEntityService<Player> playerService)
+    public static void Init(IDatabaseEntityService<Account> accountService)
     {
-        _playerService = playerService;
+        _accountService = accountService;
         _initialized = true;
     }
     
     
-    public static List<Player>? GetAllPlayers()
+    public static List<Account>? GetAllAccounts()
     {
         CheckInit();
         
-        return _playerService.GetAll().GetAwaiter().GetResult();
+        return _accountService.GetAll().GetAwaiter().GetResult();
     }
     
-    public static Player? GetPlayer(Player player)
+    public static Account? GetAccount(Account account)
     {
         CheckInit();
         
-        return _playerService.GetFromKey(player).GetAwaiter().GetResult();
+        return _accountService.GetFromKey(account).GetAwaiter().GetResult();
     }
     
-    public static bool PlayerExists(Player player)
+    public static bool AccountExists(Account account)
     {
         CheckInit();
         
-        return GetPlayer(player) != null;
+        return GetAccount(account) != null;
     }
     
-    public static Result AddPlayer(Player player)
+    public static Result AddAccount(Account account)
     {
         CheckInit();
         
-        player.Password = PasswordProtector.Protect(player.Password);
+        account.Password = PasswordProtector.Protect(account.Password);
         
-        return _playerService.Insert(player).GetAwaiter().GetResult();
+        return _accountService.Insert(account).GetAwaiter().GetResult();
     }
     
-    public static bool ValidateCredentials(Player player, string password)
+    public static bool ValidateCredentials(Account account, string password)
     {
         CheckInit();
         
-        return PasswordProtector.Verify(password, player.Password);
+        return PasswordProtector.Verify(password, account.Password);
     }
     
     public static bool IsValidEmail(string email)
