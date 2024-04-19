@@ -74,30 +74,22 @@ public class LoginController : BaseController
 
         var result = Core.AddAccount(player);
         
-        if (result == Core.Result.Success)
+        switch (result)
         {
-            HttpContext.Session.SetString("user", player.Username);
-            return RedirectToAction("Index", "Home");
-        }
-        
-        if (result == Core.Result.Duplicate)
-        {
-            TempData["signin-error"] = Core.AccountExists(new Account(0, username: username))
-                ? "Username is already in use"
-                : "Email is already in use";
+            case Core.Result.Success:
+                HttpContext.Session.SetString("user", player.Username);
+                return RedirectToAction("Index", "Home");
             
-            return RedirectToAction("SignIn", "Login");
+            case Core.Result.Duplicate:
+                TempData["signin-error"] = Core.AccountExists(new Account(0, username: username))
+                    ? "Username is already in use"
+                    : "Email is already in use";
+                return RedirectToAction("SignIn", "Login");
+
+            case Core.Result.Fail:
+            default:
+                TempData["signin-error"] = "Failed to create account";
+                return RedirectToAction("SignIn", "Login");
         }
-        
-        //if the result is not successful, return the appropriate error message
-        var resultMessage = result switch
-        {
-            Core.Result.Duplicate => "Email or Username is already in use",
-            _ => "Failed to create account"
-        };
-        
-        TempData["signin-error"] = resultMessage;
-        
-        return RedirectToAction("SignIn", "Login");
     }
 }
