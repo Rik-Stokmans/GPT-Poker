@@ -1,4 +1,3 @@
-using LogicLayer;
 using LogicLayer.Core;
 using LogicLayer.Models;
 using Microsoft.AspNetCore.Mvc;

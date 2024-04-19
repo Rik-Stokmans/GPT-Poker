@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using GPT_Poker.Models;
-using LogicLayer;
+using LogicLayer.Core;
 
 namespace GPT_Poker.Controllers;
 

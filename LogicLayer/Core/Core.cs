@@ -1,6 +1,3 @@
-using System.Net.Mail;
-using System.Text.RegularExpressions;
-using LogicLayer.Cryptography;
 using LogicLayer.Interfaces;
 using LogicLayer.Models;
 

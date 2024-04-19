@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using LogicLayer;
 using LogicLayer.Core;
 using LogicLayer.Interfaces;
 

@@ -1,4 +1,3 @@
-using LogicLayer;
 using LogicLayer.Models;
 using UnitTests.MockData;
 

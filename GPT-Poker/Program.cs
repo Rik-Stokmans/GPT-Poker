@@ -1,5 +1,4 @@
 using DataLayer.Services;
-using LogicLayer;
 using LogicLayer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
