@@ -1,35 +1,22 @@
-﻿@using LogicLayer.Models
+﻿@model AccountViewModel
 
 
 <body>
 
-    <div id="content-left">
-        <div id="content-left-navbar">
-            
-        </div>
+<div id="content-left">
+    <div id="content-left-content">
+        
+    </div>
+</div>
 
-        <div id="content-left-content">
+<div id="content-right">
+    <div id="content-right-navbar">
 
-            <ul>
-                @foreach (var account in ViewData["accounts"] as IList<Account>)
-                {
-                    <li>
-                        @account.Username
-                    </li>
-                }
-            </ul>
-            
-        </div>
     </div>
 
-    <div id="content-right">
-        <div id="content-right-navbar">
+    <div id="content-right-content">
 
-        </div>
-
-        <div id="content-right-content">
-
-        </div>
     </div>
+</div>
 
 </body>

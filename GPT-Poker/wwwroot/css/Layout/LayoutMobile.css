@@ -140,10 +140,6 @@
         background: linear-gradient(to bottom, #0000cc 0%, #ff0066 100%);
     }
 
-    #content-left-navbar {
-
-    }
-
     #content-left-content {
 
     }
@@ -151,7 +147,7 @@
     /* Right */
 
     #content-right {
-        visibility: hidden;
+        display: none;
     }
 
     #content-right-navbar {

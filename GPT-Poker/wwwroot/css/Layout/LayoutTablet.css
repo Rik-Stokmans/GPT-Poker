@@ -146,11 +146,6 @@
         /*background-color: rgb(255, 0, 0);*/
     }
 
-    #content-left-navbar {
-        height: var(--navbar-height);
-        background-color: blueviolet;
-    }
-
     #content-left-content {
 
     }
