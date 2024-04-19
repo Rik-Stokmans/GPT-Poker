@@ -87,9 +87,9 @@ public static partial class Core
     public static (bool valid, string message) IsValidUsername(string username)
     {
         //check if the username is valid
-        if (username.Length is < 5 or > 20)
+        if (username.Length is < 3 or > 20)
         {
-            return (false, "Username must be between 5 and 20 characters");
+            return (false, "Username must be between 3 and 20 characters");
         }
         
         //check if the username is alphanumeric using regex

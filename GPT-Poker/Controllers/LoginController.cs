@@ -52,7 +52,7 @@ public class LoginController : BaseController
         email = Core.FormatEmail(email);
         
         //check if the email is valid
-        if (!Core.IsValidEmail(email)) 
+        if (!Core.IsValidEmail(email))
         {
             TempData["signin-error"] = "Invalid Email";
             return RedirectToAction("SignIn", "Login");
