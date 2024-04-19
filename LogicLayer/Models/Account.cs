@@ -14,7 +14,7 @@ public class Account
         Lives = lives;
     }
 
-    public Account(int id, string? email = null, string? username = null)
+    public Account(int id = 0, string? email = null, string? username = null)
     {
         Id = id;
         if (email != null) Email = email;
