@@ -1,4 +1,5 @@
 using LogicLayer;
+using LogicLayer.Core;
 using LogicLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -76,17 +77,17 @@ public class LoginController : BaseController
         
         switch (result)
         {
-            case Core.Result.Success:
+            case DatabaseResult.Success:
                 HttpContext.Session.SetString("user", player.Username);
                 return RedirectToAction("Index", "Home");
             
-            case Core.Result.Duplicate:
+            case DatabaseResult.Duplicate:
                 TempData["signin-error"] = Core.AccountExists(new Account(0, username: username))
                     ? "Username is already in use"
                     : "Email is already in use";
                 return RedirectToAction("SignIn", "Login");
 
-            case Core.Result.Fail:
+            case DatabaseResult.Fail:
             default:
                 TempData["signin-error"] = "Failed to create account";
                 return RedirectToAction("SignIn", "Login");

@@ -1,44 +1,24 @@
 using System.Net.Mail;
 using System.Text.RegularExpressions;
-using LogicLayer.Interfaces;
-using LogicLayer.Models;
 using LogicLayer.Cryptography;
+using LogicLayer.Models;
 
-namespace LogicLayer;
+namespace LogicLayer.Core;
 
 public static partial class Core
 {
-
-    public enum Result
+    public static Account? GetAccount(Account account)
     {
-        Success,
-        Fail,
-        Duplicate
+        CheckInit();
+        
+        return _accountService.GetFromKey(account).GetAwaiter().GetResult();
     }
-
-    // ReSharper disable once NullableWarningSuppressionIsUsed
-    private static IDatabaseEntityService<Account> _accountService = null!;
-    private static bool _initialized;
-    
-    public static void Init(IDatabaseEntityService<Account> accountService)
-    {
-        _accountService = accountService;
-        _initialized = true;
-    }
-    
     
     public static List<Account>? GetAllAccounts()
     {
         CheckInit();
         
         return _accountService.GetAll().GetAwaiter().GetResult();
-    }
-    
-    public static Account? GetAccount(Account account)
-    {
-        CheckInit();
-        
-        return _accountService.GetFromKey(account).GetAwaiter().GetResult();
     }
     
     public static bool AccountExists(Account account)
@@ -48,7 +28,7 @@ public static partial class Core
         return GetAccount(account) != null;
     }
     
-    public static Result AddAccount(Account account)
+    public static DatabaseResult AddAccount(Account account)
     {
         CheckInit();
         
@@ -93,7 +73,7 @@ public static partial class Core
         }
         
         //check if the username is alphanumeric using regex
-        if (!MyRegex().IsMatch(username))
+        if (!EmailRegex().IsMatch(username))
         {
             return (false, "Username can only contain letters and numbers");
         }
@@ -109,15 +89,7 @@ public static partial class Core
     
     
     
-    //Private methods
-    private static void CheckInit()
-    {
-        if (!_initialized) throw new Exception("Core not initialized");
-    }
-    
-    
-    
     //regex
     [GeneratedRegex("^[a-zA-Z0-9]*$")]
-    private static partial Regex MyRegex();
+    private static partial Regex EmailRegex();
 }

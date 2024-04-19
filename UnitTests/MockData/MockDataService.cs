@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using LogicLayer;
+using LogicLayer.Core;
 using LogicLayer.Interfaces;
 
 namespace UnitTests.MockData;
@@ -33,7 +34,7 @@ public class MockDataService<T>(IEnumerable<T> data) : IDatabaseEntityService<T>
         throw new NotImplementedException();
     }
 
-    public Task<Core.Result> Insert(T obj)
+    public Task<DatabaseResult> Insert(T obj)
     {
         throw new NotImplementedException();
     }

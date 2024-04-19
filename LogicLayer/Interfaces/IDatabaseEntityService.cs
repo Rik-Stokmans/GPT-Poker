@@ -6,7 +6,7 @@ public interface IDatabaseEntityService<T>
 
     public Task<List<T>?> GetAll();
     
-    public Task<Core.Result> Insert(T obj);
+    public Task<Core.DatabaseResult> Insert(T obj);
     
     public Task Update(T obj);
     
