@@ -1,4 +1,5 @@
 using LogicLayer.Core;
+using LogicLayer.Cryptography;
 using LogicLayer.Models;
 using UnitTests.MockData;
 
@@ -6,61 +7,56 @@ namespace UnitTests;
 
 public class CoreTests
 {
-    private readonly List<Account> _accounts = 
-    [
-        new Account
-        {
-            Id = 1,
-            Username = "Player 1",
-            Email = "Test1@mail.com",
-            Password = "passwordTest1",
-            Lives = 3
-        },
-
-        new Account
-        {
-            Id = 2,
-            Username = "Player 2",
-            Email = "Test2@mail.com",
-            Password = "passwordTest2",
-            Lives = 1
-        },
-
-        new Account
-        {
-            Id = 3,
-            Username = "Player 3",
-            Email = "Test3@mail.com",
-            Password = "passwordTest3",
-            Lives = 0
-        },
-
-        new Account
-        {
-            Id = 4,
-            Username = "Player 4",
-            Email = "Test4@mail.com",
-            Password = "passwordTest4",
-            Lives = 2
-        },
-
-        new Account
-        {
-            Id = 5,
-            Username = "Player 5",
-            Email = "Test5@mail.com",
-            Password = "passwordTest5",
-            Lives = 5
-        }
-    ];
+    
     
     
     [SetUp]
     public void Setup()
     {
-        var accountService = new MockDataService<Account>(_accounts);
+        var accounts = new List<Account>();
+
+        for (int i = 0; i < 10; i++)
+        {
+            var id = i;
+            var username = "Player " + i;
+            var email = "Test" + i + "@mail.com";
+            var password = PasswordProtector.Protect("password" + i);
+            var lives = i > 5 ? 5 : i;
+            
+            accounts.Add(new Account(id, username, email, password, lives));
+        }
+
+
+        var units = new List<Unit>();
         
-        Core.Init(accountService);
+        for (int i = 1; i <= 25; i++)
+        {
+            var id = i;
+            var sectionId = (i - 1) / 5 + 1;
+            var placeInSection = (i - 1) % 5 + 1;
+            var name = "Unit " + placeInSection;
+            
+            units.Add(new Unit(id, sectionId, placeInSection, name));
+        }
+
+
+        var sections = new List<Section>();
+        
+        for (int i = 1; i <= 5; i++)
+        {
+            var id = i;
+            var name = "Section " + i;
+            
+            sections.Add(new Section(id, name));
+        }
+        
+        
+        
+        var accountService = new MockDataService<Account>(accounts);
+        var unitService = new MockDataService<Unit>(units);
+        var sectionService = new MockDataService<Section>(sections);
+        
+        Core.Init(accountService, sectionService, unitService);
     }
     
     
@@ -68,8 +64,7 @@ public class CoreTests
     [Test]
     public void GetFromKeyTest()
     {
-        var account = Core.GetAccount(new Account(0, "Test3@mail.com"));
-        
+        var account = Core.GetAccount(new Account(email: "Test3@mail.com"));
         
         if (account == null)
         {
