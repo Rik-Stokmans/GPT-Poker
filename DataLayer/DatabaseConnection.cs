@@ -21,8 +21,6 @@ public class DatabaseConnection : IAsyncDisposable
         try
         {
             Connection.Open();
-            
-            Console.WriteLine("Connected to the database.");
         }
         catch (MySqlException exception)
         {
@@ -33,7 +31,5 @@ public class DatabaseConnection : IAsyncDisposable
     public async ValueTask DisposeAsync()
     {
         await Connection.CloseAsync();
-        
-        Console.WriteLine("Disconnected from the database.");
     }
 }

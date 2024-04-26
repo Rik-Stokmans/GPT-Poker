@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LogicLayer.Models;
 
-public class Player
+public class Account
 {
-    public Player(int id, string username, string email, string password, int lives)
+    public Account(int id, string username, string email, string password, int lives)
     {
         Id = id;
         Username = username;
@@ -14,14 +14,14 @@ public class Player
         Lives = lives;
     }
 
-    public Player(int id, string? email = null, string? username = null)
+    public Account(int id = 0, string? email = null, string? username = null)
     {
         Id = id;
         if (email != null) Email = email;
         if (username != null) Username = username;
     }
 
-    public Player()
+    public Account()
     {
     }
 

@@ -1,10 +1,10 @@
 using DataLayer.Services;
-using LogicLayer;
+using LogicLayer.Core;
 using LogicLayer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Core.Init(new DatabaseEntityService<Player>());
+Core.Init(new DatabaseEntityService<Account>(), new DatabaseEntityService<Section>(), new DatabaseEntityService<Unit>());
 
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();

@@ -1,0 +1,34 @@
+@model SectionViewModel
+
+<!-- todo check if the current section has been unlocked for the user -->
+
+<div class="section-container-unlocked">
+    
+    <!-- todo make the tag gray if the section has not been unlocked -->
+    
+    <div class="section-tag-unlocked">
+        beginner
+    </div>
+    
+    <!-- todo make the text gray if the section has not been unlocked -->
+    
+    <div class="section-title-unlocked">
+        @Model.Section.Name
+    </div>
+    
+    <!-- todo make use of the progress of the player to set the progress indicator -->
+    
+    <div class="section-progress-unlocked">
+        <progress value="@Model.Section.Id" max="10"></progress>
+        <p>@Model.Section.Id / 10</p>
+    </div>
+
+    <!-- todo make the button non responsive when it is not unlocked and make it dark with blue letters -->
+    
+    <div class="section-button-unlocked">
+        continue
+    </div>
+    
+    
+    
+</div>

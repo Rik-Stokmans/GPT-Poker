@@ -1,11 +1,10 @@
-using System.Text.RegularExpressions;
-using LogicLayer;
+using LogicLayer.Core;
 using LogicLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GPT_Poker.Controllers;
 
-public partial class LoginController : BaseController
+public class LoginController : BaseController
 {
     
     public IActionResult Index()
@@ -25,7 +24,7 @@ public partial class LoginController : BaseController
     
     public IActionResult LoginPost(string identifier, string password)
     {
-        var player = Core.GetPlayer(identifier.Contains('@') ? new Player(0, email: identifier) : new Player(0, username: identifier));
+        var player = Core.GetAccount(identifier.Contains('@') ? new Account(email: identifier) : new Account(username: identifier));
 
 
         if (player == null)
@@ -49,66 +48,48 @@ public partial class LoginController : BaseController
 
     public IActionResult SignInPost(string username, string email, string password)
     {
+        //check format the email to remove dots before the '@'
+        email = Core.FormatEmail(email);
         
         //check if the email is valid
-        if (!Core.IsValidEmail(email)) 
+        if (!Core.IsValidEmail(email))
         {
             TempData["signin-error"] = "Invalid Email";
             return RedirectToAction("SignIn", "Login");
         }
         
-        //remove all dots from the email before the '@' and make the email lowercase
-        email = string.Concat(email[..email.IndexOf('@')].Replace(".", ""), email.AsSpan(email.IndexOf('@'))).ToLower();
-        
         
         //check if the username is valid
-        if (username.Length is < 5 or > 20)
-        {
-            TempData["signin-error"] = "Username must be between 5 and 20 characters";
-            return RedirectToAction("SignIn", "Login");
-        }
+        var usernameValidity = Core.IsValidUsername(username);
         
-        //check if the username is alphanumeric
-        if (!UsernameRegex().IsMatch(username))
+        if (!usernameValidity.valid)
         {
-            TempData["signin-error"] = "Username can only contain letters and numbers";
-            return RedirectToAction("SignIn", "Login");
-        }
-        
-        //check if the username starts with a letter
-        if (!char.IsLetter(username[0]))
-        {
-            TempData["signin-error"] = "Username must start with a letter";
+            TempData["signin-error"] = usernameValidity.message;
             return RedirectToAction("SignIn", "Login");
         }
         
         
         
-        
-        var player = new Player(0, username, email, password, 5);
+        var player = new Account(0, username, email, password, 5);
 
-        var result = Core.AddPlayer(player);
+        var result = Core.AddAccount(player);
         
-        var message = result switch
+        switch (result)
         {
-            Core.Result.Succes => "Account Created!",
-            Core.Result.Duplicate => "Email or Username is already in use",
-            _ => "Failed to create account"
-        };
-        
-        TempData["signin-error"] = message;
-        
-        if (result == Core.Result.Succes)
-        {
-            TempData["signin-error"] = "";
+            case DatabaseResult.Success:
+                HttpContext.Session.SetString("user", player.Username);
+                return RedirectToAction("Index", "Home");
             
-            HttpContext.Session.SetString("user", player.Username);
-            return RedirectToAction("Index", "Home");
-        }
-        
-        return RedirectToAction("SignIn", "Login");
-    }
+            case DatabaseResult.Duplicate:
+                TempData["signin-error"] = Core.AccountExists(new Account(0, username: username))
+                    ? "Username is already in use"
+                    : "Email is already in use";
+                return RedirectToAction("SignIn", "Login");
 
-    [GeneratedRegex("^[a-zA-Z0-9]+$")]
-    private static partial Regex UsernameRegex();
+            case DatabaseResult.Fail:
+            default:
+                TempData["signin-error"] = "Failed to create account";
+                return RedirectToAction("SignIn", "Login");
+        }
+    }
 }

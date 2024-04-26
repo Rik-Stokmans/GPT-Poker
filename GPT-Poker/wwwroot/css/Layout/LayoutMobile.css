@@ -120,7 +120,7 @@
 
     #content {
         width: 100%;
-        height: 100%;
+        height: max-content;
 
         overflow-y: auto;
 
@@ -135,13 +135,9 @@
 
     #content-left {
         width: 100%;
-        height: 2000px;
+        height: max-content;
 
         background: linear-gradient(to bottom, #0000cc 0%, #ff0066 100%);
-    }
-
-    #content-left-navbar {
-
     }
 
     #content-left-content {
@@ -151,7 +147,7 @@
     /* Right */
 
     #content-right {
-        visibility: hidden;
+        display: none;
     }
 
     #content-right-navbar {

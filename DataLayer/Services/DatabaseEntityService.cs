@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using LogicLayer.Interfaces;
 using Dapper;
-using LogicLayer;
+using LogicLayer.Core;
 using MySql.Data.MySqlClient;
 
 namespace DataLayer.Services;
@@ -30,11 +30,7 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
         }
         
         
-        if (query == "")
-        {
-            Console.WriteLine("No key with a value found in object.");
-            return default;
-        }
+        if (query == "") return default;
         
         try
         {
@@ -65,7 +61,7 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
     }
 
     
-    public async Task<Core.Result> Insert(T obj)
+    public async Task<DatabaseResult> Insert(T obj)
     {
         await using var connection = new DatabaseConnection();
         var properties = typeof(T).GetProperties().Where(prop => prop.CustomAttributes.All(attr => attr.AttributeType != typeof(DatabaseGeneratedAttribute))).ToList();
@@ -76,22 +72,20 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
         
         try
         {
-            Console.WriteLine(query);
-            
             await connection.Connection.ExecuteScalarAsync<T>(query, obj);
             
-            return Core.Result.Succes;
+            return DatabaseResult.Success;
         }
         catch (MySqlException e)
         {
             if (e.Message.StartsWith("Duplicate entry"))
             {
-                return Core.Result.Duplicate;
+                return DatabaseResult.Duplicate;
             }
             Console.WriteLine(e.Message);
         }
 
-        return Core.Result.Fail;
+        return DatabaseResult.Fail;
     }
     
     
