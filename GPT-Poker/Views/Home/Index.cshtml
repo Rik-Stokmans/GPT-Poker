@@ -1,11 +1,22 @@
-﻿@model AccountViewModel
+﻿@using LogicLayer.Models
+@model AccountViewModel
 
-
+<head>
+    <meta charset="UTF-8">
+    <title>GPT-Poker</title>
+    <link rel="stylesheet" href="~/css/Components.css">
+    <link rel="stylesheet" href="~/css/Fonts.css">
+</head>
 <body>
 
 <div id="content-left">
-    <div id="content-left-content">
-        
+    <div id="content-left-content" style="padding-top: 50px !important;">
+
+        @foreach (var section in (List<Section>)ViewData["Sections"])
+        {
+            @await Html.PartialAsync("SectionPartial", new SectionViewModel(section))
+        }
+
     </div>
 </div>
 

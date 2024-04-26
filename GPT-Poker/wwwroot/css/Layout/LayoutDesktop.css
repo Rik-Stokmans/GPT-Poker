@@ -138,14 +138,14 @@
 
     #content-left {
         width: 597px;
-        height: 200%;
+        height: max-content;
 
         position: sticky;
         top: 0;
 
         /* Temp */
 
-        background: linear-gradient(to bottom, #0000cc 0%, #ff0066 100%);
+        /*background: linear-gradient(to bottom, #0000cc 0%, #ff0066 100%);*/
 
         /*background-color: rgb(255, 0, 0);*/
     }
@@ -158,14 +158,14 @@
 
     #content-right {
         width: 398px;
-        height: 110%;
+        height: max-content;
 
         position: sticky;
         top: 0;
 
         /* Temp */
 
-        background: linear-gradient(to bottom, #0000cc 0%, #ff0066 100%);
+        /*background: linear-gradient(to bottom, #0000cc 0%, #ff0066 100%);*/
 
         /*background-color: rgb(255, 0, 0);*/
     }

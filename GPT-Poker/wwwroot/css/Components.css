@@ -13,6 +13,7 @@
     letter-spacing: 1px;
 }
 
+
 .button-lime {
     all: unset;
     width: 100%;
@@ -27,6 +28,7 @@
     font-size: 16px;
     letter-spacing: 1px;
 }
+
 
 .input-field {
     width: 100%;
@@ -45,3 +47,100 @@
     font-size: 16px;
 }
 
+
+.section-container-unlocked {
+    width: 100%;
+    height: 256px;
+
+    margin: 30px 0 30px 0;
+    padding: 28px;
+
+    background-color: #02AF85;
+
+    border-radius: 18px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.section-tag-unlocked {
+    height: 24px;
+    width: max-content;
+    padding: 1px 12px 1px 12px;
+    
+    text-align: center;
+    border-radius: 5px;
+    color: #FFFFFF;
+    background-color: rgba(217, 217, 217, 0.24);
+    font-family: Duolingo-Bold, sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+
+.section-title-unlocked {
+    height: 33px;
+    width: max-content;
+
+    color: #FFFFFF;
+    font-family: Duolingo-Bold, sans-serif;
+    font-size: 25px;
+    letter-spacing: 1px;
+}
+
+
+.section-progress-unlocked {
+    display: flex;
+    flex-direction: row;
+}
+.section-progress-unlocked > p {
+    margin: 0 0 0 8px;
+    font-size: 15px;
+    font-family: Duolingo-Bold, sans-serif;
+    color: #FFFFFF;
+}
+.section-progress-unlocked > progress[value] {
+    --color: #00c696;
+    --background: rgba(38, 54, 38, 0.29); /* the background color */
+    
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 200px;
+    height: 19px;
+    border-radius: 10px;
+    background: var(--background);
+}
+.section-progress-unlocked > progress[value]::-webkit-progress-bar {
+    border-radius: 10em;
+    background: var(--background);
+}
+.section-progress-unlocked > progress[value]::-webkit-progress-value {
+    border-radius: 10em;
+    background: var(--color);
+}
+.section-progress-unlocked > progress[value]::-moz-progress-bar {
+    border-radius: 10em;
+    background: var(--color);
+}
+
+
+.section-button-unlocked {
+    height: 50px;
+    width: max-content;
+    padding: 11px 20px 11px 20px;
+    
+    text-align: center;
+    border-radius: 10px;
+    color: #02AF85;
+    background-color: #FFFFFF;
+    border-bottom: #C9C9C9 solid 5px;
+    cursor: pointer;
+    font-family: Duolingo-Bold, sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 1px;
+}

@@ -12,10 +12,9 @@ public class HomeController : BaseController
     public IActionResult Index()
     {
 
-        foreach (var unit in Core.GetUnitsInSection(new Section(1)))
-        {
-            Console.WriteLine("Unit " + unit.PlaceInSection + ": " + unit.Name);
-        }
+        ViewData["sections"] = Core.GetAllSections();
+        ViewData["units"] = Core.GetAllUnits();
+        
         
         if (!HttpContext.Session.TryGetValue("user", out _))
         {

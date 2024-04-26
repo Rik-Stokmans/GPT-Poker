@@ -137,11 +137,11 @@
 
     #content-left {
         width: 597px;
-        height: 200%;
+        height: max-content;
 
         /* Temp */
 
-        background: linear-gradient(to bottom, #0000cc 0%, #ff0066 100%);
+        /*background: linear-gradient(to bottom, #0000cc 0%, #ff0066 100%);*/
         
         /*background-color: rgb(255, 0, 0);*/
     }
@@ -153,7 +153,7 @@
     /* Right */
 
     #content-right {
-        visibility: hidden;
+        display: none;
     }
 
     #content-right-navbar {

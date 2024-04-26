@@ -24,7 +24,7 @@ public class LoginController : BaseController
     
     public IActionResult LoginPost(string identifier, string password)
     {
-        var player = Core.GetAccount(identifier.Contains('@') ? new Account(0, email: identifier) : new Account(0, username: identifier));
+        var player = Core.GetAccount(identifier.Contains('@') ? new Account(email: identifier) : new Account(username: identifier));
 
 
         if (player == null)
