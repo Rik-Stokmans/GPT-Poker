@@ -2,7 +2,7 @@ namespace LogicLayer.Interfaces;
 
 public interface IDatabaseEntityService<T>
 {
-    public Task<T?> GetFromKey(T objectWithKey);
+    public Task<List<T>?> GetFromKey(T objectWithKey);
 
     public Task<List<T>?> GetAll();
     

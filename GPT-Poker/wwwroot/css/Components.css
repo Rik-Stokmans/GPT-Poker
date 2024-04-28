@@ -48,9 +48,10 @@
 }
 
 
+
 .section-container-unlocked {
     width: 100%;
-    height: 256px;
+    height: 240px;
 
     margin: 30px 0 30px 0;
     padding: 28px;
@@ -63,7 +64,6 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
 
 .section-tag-unlocked {
     height: 24px;
@@ -80,7 +80,6 @@
     letter-spacing: 1px;
 }
 
-
 .section-title-unlocked {
     height: 33px;
     width: max-content;
@@ -90,7 +89,6 @@
     font-size: 25px;
     letter-spacing: 1px;
 }
-
 
 .section-progress-unlocked {
     display: flex;
@@ -127,17 +125,90 @@
     background: var(--color);
 }
 
-
 .section-button-unlocked {
+    all: unset;
     height: 50px;
     width: max-content;
-    padding: 11px 20px 11px 20px;
+    padding: 0 20px 0 20px;
     
     text-align: center;
     border-radius: 10px;
     color: #02AF85;
     background-color: #FFFFFF;
     border-bottom: #C9C9C9 solid 5px;
+    cursor: pointer;
+    font-family: Duolingo-Bold, sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+
+
+.section-container-locked {
+    width: 100%;
+    height: 240px;
+
+    margin: 30px 0 30px 0;
+    padding: 20px 26px 20px 26px;
+
+    background-color: #202F36;
+    border: #3A454E solid 2px;
+
+    border-radius: 18px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.section-tag-locked {
+    height: 24px;
+    width: max-content;
+    padding: 1px 12px 1px 12px;
+
+    text-align: center;
+    border-radius: 5px;
+    color: #56646C;
+    background-color: #212D32;
+    font-family: Duolingo-Bold, sans-serif;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.section-title-locked {
+    height: 33px;
+    width: max-content;
+
+    color: #56646C;
+    font-family: Duolingo-Bold, sans-serif;
+    font-size: 25px;
+    letter-spacing: 1px;
+}
+
+.section-progress-locked {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    text-transform: uppercase;
+    font-family: Duolingo-Bold, sans-serif;
+    font-size: 15px;
+    color: #47545C;
+}
+
+.section-button-locked {
+    all: unset;
+    height: 50px;
+    width: max-content;
+    padding: 0 20px 0 20px;
+
+    text-align: center;
+    border-radius: 10px;
+    color: #6EBDF4;
+    background-color: #161F24;
+    border: #37464F solid 3px;
+    border-bottom: #37464F solid 5px;
     cursor: pointer;
     font-family: Duolingo-Bold, sans-serif;
     text-transform: uppercase;

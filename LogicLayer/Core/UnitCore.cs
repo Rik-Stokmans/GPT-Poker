@@ -8,7 +8,7 @@ public static partial class Core
     {
         CheckInit();
         
-        return _unitService.GetFromKey(unit).GetAwaiter().GetResult();
+        return _unitService.GetFromKey(unit).GetAwaiter().GetResult()?[0];
     }
     
     public static List<Unit>? GetAllUnits()
