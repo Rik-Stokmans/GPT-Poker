@@ -1,14 +1,32 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace LogicLayer.Models;
 
 public class UnitProgress
 {
-    public UnitProgress(int accountId, int unitId)
+    public UnitProgress(int accountId, int unitId, int lessonProgress)
+    {
+        AccountId = accountId;
+        UnitId = unitId;
+        LessonProgress = lessonProgress;
+    }
+
+    public UnitProgress(int accountId = 0, int unitId = 0)
     {
         AccountId = accountId;
         UnitId = unitId;
     }
+
+    public UnitProgress()
+    {
+    }
     
-    
+    [Key]
     public int AccountId { get; set; }
+    
+    [Key]
     public int UnitId { get; set; }
+    
+    public int LessonProgress { get; set; }
 }

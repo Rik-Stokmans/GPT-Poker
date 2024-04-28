@@ -4,7 +4,14 @@ using LogicLayer.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Core.Init(new DatabaseEntityService<Account>(), new DatabaseEntityService<Section>(), new DatabaseEntityService<Unit>());
+Core.Init(
+    new DatabaseEntityService<Account>(), 
+    new DatabaseEntityService<Section>(), 
+    new DatabaseEntityService<Unit>(),
+    new DatabaseEntityService<Lesson>(),
+    new DatabaseEntityService<SectionProgress>(),
+    new DatabaseEntityService<UnitProgress>(),
+    new DatabaseEntityService<LessonProgress>());
 
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();

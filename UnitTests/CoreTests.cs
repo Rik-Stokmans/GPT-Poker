@@ -53,10 +53,14 @@ public class CoreTests
         
         
         var accountService = new MockDataService<Account>(accounts);
-        var unitService = new MockDataService<Unit>(units);
         var sectionService = new MockDataService<Section>(sections);
+        var unitService = new MockDataService<Unit>(units);
+        var lessonService = new MockDataService<Lesson>(new List<Lesson>());
+        var sectionProgressService = new MockDataService<SectionProgress>(new List<SectionProgress>());
+        var unitProgressService = new MockDataService<UnitProgress>(new List<UnitProgress>());
+        var lessonProgressService = new MockDataService<LessonProgress>(new List<LessonProgress>());
         
-        Core.Init(accountService, sectionService, unitService);
+        Core.Init(accountService, sectionService, unitService, lessonService, sectionProgressService, unitProgressService, lessonProgressService);
     }
     
     
