@@ -4,11 +4,11 @@ namespace LogicLayer.Core;
 
 public static partial class Core
 {
-    public static SectionProgress? GetSectionProgress(SectionProgress sectionProgress)
+    public static List<SectionProgress>? GetAllAccountSectionProgresses(Account account)
     {
         CheckInit();
         
-        return _sectionProgressService.GetFromKey(sectionProgress).GetAwaiter().GetResult()?[0];
+        return _sectionProgressService.GetFromKey(new SectionProgress(accountId: account.Id)).GetAwaiter().GetResult();
     }
     
     public static List<SectionProgress>? GetAllSectionProgresses()

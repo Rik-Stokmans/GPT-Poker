@@ -12,9 +12,8 @@ public class HomeController : BaseController
     public IActionResult Index()
     {
 
-        ViewData["sections"] = Core.GetAllSections();
-        ViewData["units"] = Core.GetAllUnits();
-        
+        var sections = Core.GetAllSections();
+        sections ??= [];
         
         if (!HttpContext.Session.TryGetValue("user", out _))
         {
@@ -37,9 +36,9 @@ public class HomeController : BaseController
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
         }
+
         
-        
-        var accountViewModel = new AccountViewModel(account);
+        var accountViewModel = new AccountViewModel(account, sections);
         
         
         return View(accountViewModel);

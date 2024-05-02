@@ -1,0 +1,50 @@
+@model AccountProgressModel
+
+<head>
+    <meta charset="UTF-8">
+    <title>GPT-Poker</title>
+    <link rel="stylesheet" href="~/css/Components.css">
+    <link rel="stylesheet" href="~/css/Fonts.css">
+</head>
+<body>
+
+<div id="content-left">
+    <div id="content-left-content" style="padding-top: 50px !important;">
+        
+        @foreach (var modelSection in Model.Sections)
+        {
+            <p>@modelSection.Name</p>
+            
+            @foreach(var modelUnit in Model.Units.Where(x => x.SectionId == modelSection.Id))
+            {
+                <p> -- @modelUnit.Name</p>
+                
+                @foreach(var modelLesson in Model.Lessons.Where(x => x.UnitId == modelUnit.Id))
+                {
+                    <p> ---- @modelLesson.Name</p>
+                    @try
+                    {
+                        <p> ------ Progress: @Model.sectionProgressModels.Where(x => x.SectionId == modelSection.Id).ToList().First().unitProgressModels.Where(y => y.UnitId == modelUnit.Id).ToList().First().lessonProgressModels.Where(z => z.LessonId == modelLesson.Id).ToList().First().Progress</p>
+                    }
+                    catch (Exception e)
+                    {
+                        // ignored
+                    }
+                }
+            }
+        }
+        
+    </div>
+</div>
+
+<div id="content-right">
+    <div id="content-right-navbar">
+
+    </div>
+
+    <div id="content-right-content">
+
+    </div>
+</div>
+
+</body>

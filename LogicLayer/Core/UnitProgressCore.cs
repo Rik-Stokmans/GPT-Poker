@@ -4,11 +4,11 @@ namespace LogicLayer.Core;
 
 public static partial class Core
 {
-    public static UnitProgress? GetUnitProgress(UnitProgress unitProgress)
+    public static List<UnitProgress>? GetAllAccountUnitProgresses(Account account)
     {
         CheckInit();
         
-        return _unitProgressService.GetFromKey(unitProgress).GetAwaiter().GetResult()?[0];
+        return _unitProgressService.GetFromKey(new UnitProgress(accountId: account.Id)).GetAwaiter().GetResult();
     }
     
     public static List<UnitProgress>? GetAllUnitProgresses()

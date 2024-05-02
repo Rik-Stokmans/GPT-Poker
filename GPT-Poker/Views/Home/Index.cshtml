@@ -1,5 +1,4 @@
-﻿@using LogicLayer.Models
-@model AccountViewModel
+﻿@model AccountViewModel
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +11,7 @@
 <div id="content-left">
     <div id="content-left-content" style="padding-top: 50px !important;">
 
-        @foreach (var section in (List<Section>)ViewData["Sections"])
+        @foreach (var section in Model.Sections)
         {
             @await Html.PartialAsync("SectionPartial", new SectionViewModel(section))
         }
