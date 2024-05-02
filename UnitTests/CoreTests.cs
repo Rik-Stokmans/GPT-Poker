@@ -62,26 +62,26 @@ public class CoreTests
         
         Core.Init(accountService, sectionService, unitService, lessonService, sectionProgressService, unitProgressService, lessonProgressService);
     }
-    
-    
+
+
 
     [Test]
     public void GetFromKeyTest()
     {
         var account = Core.GetAccount(new Account(email: "Test3@mail.com"));
-        
+
         if (account == null)
         {
             Assert.Fail("Player not found");
             return;
         }
-        
-        
+
+
         if (account.Id != 3) Assert.Fail("Player Id is not 3");
         if (account.Username != "Player 3") Assert.Fail("Player Username is not Player 3");
-        
+
         Assert.Pass();
-        
+
     }
 }
 
