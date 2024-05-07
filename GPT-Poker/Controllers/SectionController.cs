@@ -1,19 +1,17 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using GPT_Poker.Models;
 using LogicLayer.Core;
 using LogicLayer.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GPT_Poker.Controllers;
 
-public class HomeController : BaseController
+public class SectionController : BaseController
 {
-    
-    public IActionResult Index()
+    public IActionResult Index(int sectionId)
     {
-
-        var sections = Core.GetAllSections();
-        sections ??= [];
+        
+        Console.WriteLine(sectionId);
+        
         
         if (!HttpContext.Session.TryGetValue("user", out _))
         {
@@ -28,7 +26,6 @@ public class HomeController : BaseController
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
         }
-
         
         var account = Core.GetAccount(new Account(username: user));
         if (account == null)
@@ -36,17 +33,13 @@ public class HomeController : BaseController
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Login");
         }
-
-        
-        var accountViewModel = new AccountViewModel(account, sections);
         
         
-        return View(accountViewModel);
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        var section = Core.GetSection(new Section(id: sectionId));
+        var progress = Core.GetSectionProgress(account, section);
+        
+        
+        return View(new SectionViewModel(section, progress));
+        
     }
 }

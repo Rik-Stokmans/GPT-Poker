@@ -10,8 +10,9 @@ public static partial class Core
     public static Account? GetAccount(Account account)
     {
         CheckInit();
+
+        return _accountService.GetFromKey(account).GetAwaiter().GetResult()?[0];
         
-        return _accountService.GetFromKey(account).GetAwaiter().GetResult();
     }
     
     public static List<Account>? GetAllAccounts()

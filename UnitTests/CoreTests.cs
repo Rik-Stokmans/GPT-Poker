@@ -53,31 +53,35 @@ public class CoreTests
         
         
         var accountService = new MockDataService<Account>(accounts);
-        var unitService = new MockDataService<Unit>(units);
         var sectionService = new MockDataService<Section>(sections);
+        var unitService = new MockDataService<Unit>(units);
+        var lessonService = new MockDataService<Lesson>(new List<Lesson>());
+        var sectionProgressService = new MockDataService<SectionProgress>(new List<SectionProgress>());
+        var unitProgressService = new MockDataService<UnitProgress>(new List<UnitProgress>());
+        var lessonProgressService = new MockDataService<LessonProgress>(new List<LessonProgress>());
         
-        Core.Init(accountService, sectionService, unitService);
+        Core.Init(accountService, sectionService, unitService, lessonService, sectionProgressService, unitProgressService, lessonProgressService);
     }
-    
-    
+
+
 
     [Test]
     public void GetFromKeyTest()
     {
         var account = Core.GetAccount(new Account(email: "Test3@mail.com"));
-        
+
         if (account == null)
         {
             Assert.Fail("Player not found");
             return;
         }
-        
-        
+
+
         if (account.Id != 3) Assert.Fail("Player Id is not 3");
         if (account.Username != "Player 3") Assert.Fail("Player Username is not Player 3");
-        
+
         Assert.Pass();
-        
+
     }
 }
 

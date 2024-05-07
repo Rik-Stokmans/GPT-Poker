@@ -7,9 +7,11 @@ namespace UnitTests.MockData;
 
 public class MockDataService<T>(IEnumerable<T> data) : IDatabaseEntityService<T>
 {
-    public Task<T?> GetFromKey(T objectWithKey)
+    public Task<List<T>?> GetFromKey(T objectWithKey)
     {
         var keyProperties = typeof(T).GetProperties().Where(prop => prop.CustomAttributes.Any(attr => attr.AttributeType == typeof(KeyAttribute))).ToList();
+        
+        List<T> result = [];
         
         foreach (var keyProperty in keyProperties)
         {
@@ -23,12 +25,14 @@ public class MockDataService<T>(IEnumerable<T> data) : IDatabaseEntityService<T>
                 
                 if (objKeyPropertyValue.Equals(keyPropertyValue))
                 {
-                    return Task.FromResult(obj);
+                    result.Add(obj);
                 }
             }
+            // ReSharper disable once NullableWarningSuppressionIsUsed
+            return Task.FromResult(result)!;
         }
-
-        return Task.FromResult(default(T));
+        // ReSharper disable once NullableWarningSuppressionIsUsed
+        return null!;
     }
 
     public Task<List<T>?> GetAll()

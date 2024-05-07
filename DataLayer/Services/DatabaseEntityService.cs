@@ -11,7 +11,7 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
 {
     private readonly string _tableName = typeof(T).Name.ToLower();
 
-    public async Task<T?> GetFromKey(T objectWithKey)
+    public async Task<List<T>?> GetFromKey(T objectWithKey)
     {
 
         var query = "";
@@ -35,7 +35,8 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
         try
         {
             await using var connection = new DatabaseConnection();
-            return await connection.Connection.QueryFirstOrDefaultAsync<T>(query);
+            var obj = await connection.Connection.QueryAsync<T>(query);
+            return obj.ToList();
         } catch (MySqlException e)
         {
             Console.WriteLine(e.Message);

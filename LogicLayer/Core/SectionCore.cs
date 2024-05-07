@@ -8,7 +8,7 @@ public static partial class Core
     {
         CheckInit();
         
-        return _sectionService.GetFromKey(section).GetAwaiter().GetResult();
+        return _sectionService.GetFromKey(section).GetAwaiter().GetResult()?[0];
     }
     
     public static List<Section>? GetAllSections()
