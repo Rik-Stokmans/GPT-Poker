@@ -17,7 +17,7 @@ public class AccountProgressModel
     public List<SectionProgressModel> sectionProgressModels = [];
     
     
-    public AccountProgressModel(Account account, List<SectionProgress> sectionProgresses, List<UnitProgress> unitProgresses, List<LessonProgress> lessonProgresses, List<Section> sections, List<Unit> units, List<Lesson> lessons)
+    public AccountProgressModel(Account account, SectionProgress? sectionProgress, List<UnitProgress> unitProgresses, List<LessonProgress> lessonProgresses, List<Section> sections, List<Unit> units, List<Lesson> lessons)
     {
         AccountId = account.Id;
         Username = account.Username;
@@ -28,12 +28,14 @@ public class AccountProgressModel
         Units = units;
         Lessons = lessons;
         
-        foreach (var sectionProgress in sectionProgresses)
+        if (sectionProgress == null)
         {
-            var sectionProgressUnits = unitProgresses.Where(x => x.SectionId == sectionProgress.SectionId).ToList();
-            
-            sectionProgressModels.Add(new SectionProgressModel(sectionProgress, sectionProgressUnits, lessonProgresses, sections, units, lessons));
+            return;
         }
+        
+        var sectionProgressUnits = unitProgresses.Where(x => x.SectionId == sectionProgress.SectionId).ToList();
+        
+        sectionProgressModels.Add(new SectionProgressModel(sectionProgress, sectionProgressUnits, lessonProgresses, sections, units, lessons));
     }
 }
 

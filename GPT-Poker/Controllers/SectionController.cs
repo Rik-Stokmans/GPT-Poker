@@ -7,8 +7,11 @@ namespace GPT_Poker.Controllers;
 
 public class SectionController : BaseController
 {
-    public IActionResult Index()
+    public IActionResult Index(int sectionId)
     {
+        
+        Console.WriteLine(sectionId);
+        
         
         if (!HttpContext.Session.TryGetValue("user", out _))
         {
@@ -32,8 +35,7 @@ public class SectionController : BaseController
         }
         
         
-        var sectionProgress = Core.GetAllAccountSectionProgresses(account);
-        sectionProgress ??= [];
+        var sectionProgress = Core.GetAllAccountSectionProgresses(account)?.Find(x => x.SectionId == sectionId);
         
         var sections = Core.GetAllSections();
         sections ??= [];

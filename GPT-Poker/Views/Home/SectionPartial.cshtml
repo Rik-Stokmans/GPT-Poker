@@ -17,7 +17,7 @@
             <p>@Model.Section.Id / 10</p>
         </div>
 
-        <button class="section-button-unlocked">continue</button>
+        <a class="section-button-unlocked" asp-action="Index" asp-controller="Section" asp-route-sectionId="@Model.Section.Id">continue</a>
         
     </div>
 }
@@ -43,7 +43,7 @@ else
             <p style="margin-left: 6px">@Model.Section.Id units</p>
         </div>
 
-        <button class="section-button-locked">jump here</button>
+        <a class="section-button-locked">jump here</a>
     
     </div>
 }
