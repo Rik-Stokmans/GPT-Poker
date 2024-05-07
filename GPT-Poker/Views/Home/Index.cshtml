@@ -1,4 +1,5 @@
-﻿@model AccountViewModel
+﻿@using LogicLayer.Core
+@model AccountViewModel
 
 <head>
     <meta charset="UTF-8">
@@ -13,7 +14,9 @@
 
         @foreach (var section in Model.Sections)
         {
-            @await Html.PartialAsync("SectionPartial", new SectionViewModel(section))
+            var progress = Core.GetSectionProgress(Model.Account, section);
+            
+            @await Html.PartialAsync("SectionPartial", new SectionViewModel(section, progress))
         }
 
     </div>

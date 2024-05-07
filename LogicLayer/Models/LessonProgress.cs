@@ -4,7 +4,7 @@ namespace LogicLayer.Models;
 
 public class LessonProgress
 {
-    public LessonProgress(int accountId, int lessonId, int progress, int unitId)
+    public LessonProgress(int accountId, int lessonId, LessonProgressEnum progress, int unitId)
     {
         AccountId = accountId;
         LessonId = lessonId;
@@ -27,8 +27,8 @@ public class LessonProgress
     
     [Key]
     public int LessonId { get; set; }
-    
-    public int Progress { get; set; }
+
+    public LessonProgressEnum Progress { get; set; } = LessonProgressEnum.NotStarted;
     
     public int UnitId { get; set; }
 }

@@ -35,32 +35,11 @@ public class SectionController : BaseController
         }
         
         
-        var sectionProgress = Core.GetAllAccountSectionProgresses(account)?.Find(x => x.SectionId == sectionId);
-        
-        var sections = Core.GetAllSections();
-        sections ??= [];
+        var section = Core.GetSection(new Section(id: sectionId));
+        var progress = Core.GetSectionProgress(account, section);
         
         
-
-        var unitProgress = Core.GetAllAccountUnitProgresses(account);
-        unitProgress ??= [];
-        
-        var units = Core.GetAllUnits();
-        units ??= [];
-        
-        
-
-        var lessonProgress = Core.GetAllAccountLessonProgresses(account);
-        lessonProgress ??= [];
-        
-        var lessons = Core.GetAllLessons();
-        lessons ??= [];
-        
-        
-
-        var accountProgressModel = new AccountProgressModel(account, sectionProgress, unitProgress, lessonProgress, sections, units, lessons);
-        
-        return View(accountProgressModel);
+        return View(new SectionViewModel(section, progress));
         
     }
 }

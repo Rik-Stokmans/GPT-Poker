@@ -1,4 +1,4 @@
-@model AccountProgressModel
+@model SectionViewModel
 
 <head>
     <meta charset="UTF-8">
@@ -11,27 +11,12 @@
 <div id="content-left">
     <div id="content-left-content" style="padding-top: 50px !important;">
         
-        @foreach (var modelSection in Model.Sections)
+        @foreach (var unit in Model.Progress.SectionProgress.Keys)
         {
-            <p>@modelSection.Name</p>
+            var lessonProgressDict = Model.Progress.SectionProgress[unit];
             
-            @foreach(var modelUnit in Model.Units.Where(x => x.SectionId == modelSection.Id))
-            {
-                <p> -- @modelUnit.Name</p>
-                
-                @foreach(var modelLesson in Model.Lessons.Where(x => x.UnitId == modelUnit.Id))
-                {
-                    <p> ---- @modelLesson.Name</p>
-                    @try
-                    {
-                        <p> ------ Progress: @Model.sectionProgressModels.Where(x => x.SectionId == modelSection.Id).ToList().First().unitProgressModels.Where(y => y.UnitId == modelUnit.Id).ToList().First().lessonProgressModels.Where(z => z.LessonId == modelLesson.Id).ToList().First().Progress</p>
-                    }
-                    catch (Exception e)
-                    {
-                        // ignored
-                    }
-                }
-            }
+            @await Html.PartialAsync("UnitPartial", new UnitProgressViewModel(unit, lessonProgressDict))
+            
         }
         
     </div>

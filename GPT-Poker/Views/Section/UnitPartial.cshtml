@@ -1,0 +1,14 @@
+@model UnitProgressViewModel
+
+
+<p>@Model.Unit.Name</p>
+
+@foreach (var lesson in Model.LessonProgresses.Keys)
+{
+    <p>--@lesson.Name</p>
+    <p>--@Model.LessonProgresses[lesson].ToString()</p>
+    
+    <br/>
+    
+    
+}
