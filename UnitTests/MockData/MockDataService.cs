@@ -7,6 +7,10 @@ namespace UnitTests.MockData;
 
 public class MockDataService<T>(IEnumerable<T> data) : IDatabaseEntityService<T>
 {
+    
+    private IEnumerable<T> data = data;
+    
+    
     public Task<List<T>?> GetFromKey(T objectWithKey)
     {
         var keyProperties = typeof(T).GetProperties().Where(prop => prop.CustomAttributes.Any(attr => attr.AttributeType == typeof(KeyAttribute))).ToList();
@@ -32,22 +36,56 @@ public class MockDataService<T>(IEnumerable<T> data) : IDatabaseEntityService<T>
             return Task.FromResult(result)!;
         }
         // ReSharper disable once NullableWarningSuppressionIsUsed
-        return null!;
+        return null!; 
     }
 
     public Task<List<T>?> GetAll()
     {
-        throw new NotImplementedException();
+        return Task.FromResult(data.ToList());
     }
 
     public Task<DatabaseResult> Insert(T obj)
     {
-        throw new NotImplementedException();
+        if (data.Contains(obj)) return Task.FromResult(DatabaseResult.Duplicate);
+
+        var list = data.ToList();
+        
+        list.Add(obj);
+        
+        data = list;
+        
+        return Task.FromResult(DatabaseResult.Success);
+        
     }
 
-    public Task Update(T obj)
+    public Task<DatabaseResult> Update(T obj)
     {
-        throw new NotImplementedException();
+        var keyProperties = typeof(T).GetProperties().Where(prop => prop.CustomAttributes.Any(attr => attr.AttributeType == typeof(KeyAttribute))).ToList();
+
+        foreach (var keyProperty in keyProperties)
+        {
+            var keyPropertyValue = keyProperty.GetValue(obj);
+            if (keyPropertyValue == null || keyPropertyValue.Equals(0)) continue;
+            
+            var key = keyPropertyValue.ToString();
+            
+            var list = data.ToList();
+            
+            data.ToList().ForEach(o =>
+            {
+                if (keyProperty.GetValue(o)?.ToString() == key)
+                {
+                    list.Remove(o);
+                    list.Add(obj);
+                }
+            });
+
+            data = list;
+            
+            return Task.FromResult(DatabaseResult.Success);
+        }
+        
+        return Task.FromResult(DatabaseResult.Fail);
     }
 
     public Task Delete(int id)

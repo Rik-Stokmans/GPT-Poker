@@ -38,6 +38,20 @@ public static partial class Core
         return _accountService.Insert(account).GetAwaiter().GetResult();
     }
     
+    public static DatabaseResult UpdateAccount(Account account)
+    {
+        CheckInit();
+        
+        return _accountService.Update(account).GetAwaiter().GetResult();
+    }
+    
+    public static DatabaseResult InsertAccount(Account account)
+    {
+        CheckInit();
+
+        return _accountService.Insert(account).GetAwaiter().GetResult();
+    }
+    
     public static bool ValidateCredentials(Account account, string password)
     {
         CheckInit();
@@ -74,7 +88,7 @@ public static partial class Core
         }
         
         //check if the username is alphanumeric using regex
-        if (!EmailRegex().IsMatch(username))
+        if (!UsernameRegex().IsMatch(username))
         {
             return (false, "Username can only contain letters and numbers");
         }
@@ -92,5 +106,5 @@ public static partial class Core
     
     //regex
     [GeneratedRegex("^[a-zA-Z0-9_-]*$")]
-    private static partial Regex EmailRegex();
+    private static partial Regex UsernameRegex();
 }

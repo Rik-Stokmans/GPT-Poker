@@ -90,7 +90,7 @@ public class DatabaseEntityService<T> : IDatabaseEntityService<T> where T : new(
     }
     
     
-    public Task Update(T obj)
+    public Task<DatabaseResult> Update(T obj)
     {
         throw new NotImplementedException();
     }
