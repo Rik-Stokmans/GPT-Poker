@@ -1,14 +1,36 @@
 @model UnitProgressViewModel
 
 
-<p>@Model.Unit.Name</p>
+<div class="unit-container">
 
-@foreach (var lesson in Model.LessonProgresses.Keys)
-{
-    <p>--@lesson.Name</p>
-    <p>--@Model.LessonProgresses[lesson].ToString()</p>
-    
-    <br/>
-    
-    
-}
+    <div class="unit-container-navbar">
+        <div class="unit-container-navbar-sectionunit">
+            section @Model.Unit.SectionId, unit @Model.Unit.PlaceInSection
+        </div>
+            
+        <div class="unit-container-navbar-title">
+            @Model.Unit.Name
+        </div>
+    </div>
+
+
+
+    <div class="unit-container-lessons">
+    @foreach (var lesson in Model.LessonProgresses.Keys)
+    {
+        <div class="lesson-container">
+            
+            <div class="lesson-container-icon">
+                
+            </div>
+            
+            
+            <progress class="lesson-container-progress" max="5" value="@Model.LessonProgresses[lesson].GetHashCode()">
+                
+            </progress>
+            
+        </div>
+    }
+    </div>
+
+</div>

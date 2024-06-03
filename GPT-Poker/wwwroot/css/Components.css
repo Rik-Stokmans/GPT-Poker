@@ -219,3 +219,85 @@
     
     line-height: 50px;
 }
+
+
+.unit-container {
+}
+
+.unit-container-navbar {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 8px 0 15px 0;
+    border-radius: 10px;
+    
+    width: 100%;
+    height: 70px;
+    justify-content: space-between;
+
+    background-color: #93D333;
+    
+}
+
+.unit-container-navbar-sectionunit {
+    
+    font-family: Duolingo-Regulair , sans-serif;
+    font-size: 15px;
+}
+
+.unit-container-navbar-title {
+    
+    font-family: Duolingo-Bold , sans-serif;
+    font-size: 15px;
+}
+
+.unit-container-lessons {
+    display: flex;
+    flex-direction: column;
+    
+    justify-items: center;
+}
+
+.lesson-container {
+    
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    height: 70px;
+    
+    overflow: hidden;
+    align-items: center;
+    
+    margin: 5px 0 10px 0;
+    
+    
+}
+
+.lesson-container-icon {
+    height: 50px;
+    width: 50px;
+    background-color: #48C1F8;
+}
+
+.lesson-container-progress {
+    
+    height: 20px;
+    width: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

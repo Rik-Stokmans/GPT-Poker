@@ -8,7 +8,7 @@ public interface IDatabaseEntityService<T>
     
     public Task<Core.DatabaseResult> Insert(T obj);
     
-    public Task Update(T obj);
+    public Task<Core.DatabaseResult> Update(T obj);
     
     public Task Delete(int id);
 
